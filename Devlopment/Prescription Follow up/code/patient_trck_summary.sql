@@ -1,0 +1,856 @@
+INSERT INTO jp3a_cdw.s_insn_dr_prd_mth_pat_trk
+With patient as (
+
+Select * from  
+(
+/* Product - Eliquis and new patient for treatment line AF */
+ 
+Select srvy_trgt.bp_par_Sk as bp_par_sk, 
+srvy_trgt.bp_sk as bp_sk, 
+CASE WHEN brd.pset_sk IS NOT NULL THEN brd.pset_sk ELSE mkt_srvy.pset_sk END as pset_sk, 
+cast(left(to_char(mkt_srvy.mkt_srvy_eff_strt_dt, 'YYYYMMDD'),6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds as pat_type_ds,
+cf.pat_type_lcl_lang_ds, 
+cf.trtt_ln_txt as trtt_ln_txt,
+sum(srvy.af_new_pat_num) as  pat_ct
+from 
+jp2a_cdw.f_hcp_prtct_ansr srvy 
+inner join jp2a_cdw.d_mkt_srvy_trgt srvy_trgt on srvy.mkt_srvy_trgt_sk = srvy_trgt.mkt_srvy_trgt_sk 
+inner join jp2a_cdw.d_mkt_srvy mkt_srvy on mkt_srvy.mkt_srvy_sk=srvy.mkt_srvy_sk
+inner join jp2a_cdw.d_pset pset on mkt_srvy.pset_sk=pset.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=pset.pset_id and cf.qstn_txt=srvy.qstn_txt and cf.ord_num=srvy.ord_num 
+LEFT JOIN  jp_ops.bp_eq_mlti_brd brd ON brd.prd_brd_grp_sk = mkt_srvy.pset_sk
+--inner join jp2a_cdw.ref_rec_type rt on srvy_trgt.rec_type_id=rt.rec_type_id 
+Where serl_num=1 and mkt_srvy.srvy_ds ilike '%処方症例入力%' and srvy.src_dlt_flag = 0 and srvy_trgt.src_dlt_flag=0 and mkt_srvy.src_dlt_flag=0
+Group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - Eliquis and new patient for treatment line PE */
+Select srvy_trgt.bp_par_Sk as bp_par_sk, 
+srvy_trgt.bp_sk as bp_sk, 
+CASE WHEN brd.pset_sk IS NOT NULL THEN brd.pset_sk ELSE mkt_srvy.pset_sk END as pset_sk, 
+cast(left(to_char(mkt_srvy.mkt_srvy_eff_strt_dt, 'YYYYMMDD'),6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds as pat_type_ds,
+cf.pat_type_lcl_lang_ds, 
+cf.trtt_ln_txt as trtt_ln_txt,
+sum(srvy.af_new_pat_num) as  pat_ct
+from 
+jp2a_cdw.f_hcp_prtct_ansr srvy 
+inner join jp2a_cdw.d_mkt_srvy_trgt srvy_trgt on srvy.mkt_srvy_trgt_sk = srvy_trgt.mkt_srvy_trgt_sk 
+inner join jp2a_cdw.d_mkt_srvy mkt_srvy on mkt_srvy.mkt_srvy_sk=srvy.mkt_srvy_sk
+inner join jp2a_cdw.d_pset pset on mkt_srvy.pset_sk=pset.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=pset.pset_id and cf.qstn_txt=srvy.qstn_txt and cf.ord_num=srvy.ord_num 
+LEFT JOIN  jp_ops.bp_eq_mlti_brd brd ON brd.prd_brd_grp_sk = mkt_srvy.pset_sk
+--inner join jp2a_cdw.ref_rec_type rt on srvy_trgt.rec_type_id=rt.rec_type_id 
+Where  serl_num=2 and mkt_srvy.srvy_ds ilike '%処方症例入力%' and srvy.src_dlt_flag = 0 and srvy_trgt.src_dlt_flag=0 and mkt_srvy.src_dlt_flag=0
+Group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - Eliquis and new patient for treatment line DVT */
+Select srvy_trgt.bp_par_Sk as bp_par_sk, 
+srvy_trgt.bp_sk as bp_sk, 
+CASE WHEN brd.pset_sk IS NOT NULL THEN brd.pset_sk ELSE mkt_srvy.pset_sk END as pset_sk, 
+cast(left(to_char(mkt_srvy.mkt_srvy_eff_strt_dt, 'YYYYMMDD'),6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds as pat_type_ds,
+cf.pat_type_lcl_lang_ds, 
+cf.trtt_ln_txt as trtt_ln_txt,
+sum(srvy.af_new_pat_num) as  pat_ct
+from 
+jp2a_cdw.f_hcp_prtct_ansr srvy 
+inner join jp2a_cdw.d_mkt_srvy_trgt srvy_trgt on srvy.mkt_srvy_trgt_sk = srvy_trgt.mkt_srvy_trgt_sk 
+inner join jp2a_cdw.d_mkt_srvy mkt_srvy on mkt_srvy.mkt_srvy_sk=srvy.mkt_srvy_sk
+inner join jp2a_cdw.d_pset pset on mkt_srvy.pset_sk=pset.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=pset.pset_id and cf.qstn_txt=srvy.qstn_txt and cf.ord_num=srvy.ord_num
+LEFT JOIN  jp_ops.bp_eq_mlti_brd brd ON brd.prd_brd_grp_sk = mkt_srvy.pset_sk
+--inner join jp2a_cdw.ref_rec_type rt on srvy_trgt.rec_type_id=rt.rec_type_id 
+Where  serl_num=3 and mkt_srvy.srvy_ds ilike '%処方症例入力%' and srvy.src_dlt_flag = 0 and srvy_trgt.src_dlt_flag=0 and mkt_srvy.src_dlt_flag=0
+Group by 1,2,3,4,5,6,7
+
+union all
+/* Product - Eliquis and targeted patients */
+Select   bp_par_sk, bp_sk, 
+CASE WHEN brd.pset_sk IS NOT NULL THEN brd.pset_sk ELSE dp.pset_sk END as pset_sk,
+rx_mth_dt_sk,pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bs.pset_sk=rlup.prd_brd_grp_sk 
+inner join jp2a_cdw.d_pset dp on rlup.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+LEFT JOIN  jp_ops.bp_eq_mlti_brd brd ON brd.prd_brd_grp_sk = dp.pset_sk
+Where serl_num=4 
+group by 1,2, 3, 4,5,6,7 
+
+-- 
+
+UNION ALL
+
+
+/* PRODUCT --- ORENCIA TOTAL Code Starts*/
+/* Product - Orencia and new patient for treatment line coming from source*/
+Select bp_par_sk, bp_sk, rlup.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,bpct.rx_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num=5 and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+union all 
+/* Product - Orencia and potential patient for treatment line coming from source*/
+Select bp_par_sk, bp_sk, rlup.pset_sk , cast(left(lgcy_src_crea_dt_sk,6)||'01' as integer)  as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,bpct.rx_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  -- followup
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where (TRTT_STRT_CALD_DT_SK is null or TRTT_STRT_CALD_DT_SK = -1)  and serl_num=6 and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+union all 
+/* Product - Orencia and targeted patients */
+Select   bp_par_sk, bp_sk,CASE WHEN rlup.pset_sk IS NOT NULL THEN rlup.pset_sk ELSE dp.pset_sk END AS pset_sk  ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct 
+from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on dp.pset_sk=rlup.prd_brd_grp_sk 
+Where serl_num=7 
+group by 1,2, 3, 4,5,6,7
+/* PRODUCT --- Orencia TOTAL Code end */
+
+UNION ALL
+-- ==================================PRESCRIPTION FOLLOW UP OBJECT CHANGES START================================
+/* PRODUCT --- OPDIVO MELA Code Starts*/
+/* Product - Opdivo Mela and new patient for treatment line as adjuvant*/
+
+
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.trtt_ln_txt= bpct.rx_ln_txt
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (8,60,73) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+/* Product - Opdivo Mela and new patient for treatment line as 1st Line*/ -- PART 1
+
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (9) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+UNION ALL
+/* Product - Opdivo Mela and new patient for treatment line as 2nd Line*/ -- PART 1 
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (10) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+
+/* Product - Opdivo Mela and new patient for treatment line as 'Other'*/ -- PART 1
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (10) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+-- ==================================PRESCRIPTION FOLLOW UP OBJECT CHANGES ENDS================================
+
+
+UNION ALL
+
+/* Product - Opdivo Mela and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id = dp.pset_id 
+Where serl_num = 13  
+group by 1,2,3,4,5,6,7
+
+/* Product - Opdivo Mela END */
+
+UNION ALL
+
+-- ==================================PRESCRIPTION FOLLOW UP OBJECT CHANGES================================
+
+/* Product - Opdivo Lung and new patient for treatment line as SQ 2nd Line */ 
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (14) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+union all
+
+
+/* Product - Opdivo Lung and new patient for treatment line as SQ 3rd Line */
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (15) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+union all 
+
+
+/* Product - Opdivo Lung and new patient for treatment line as ????(unknown background)*/
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (16) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+union all
+
+
+/* Product - Opdivo Lung and new patient for treatment line as MPM*/
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (17) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+union all
+
+
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where  serl_num=18 
+group by 1, 2, 3,4,5, 6,7
+
+union all
+/* PRODUCT --- OPDIVO RCC Code starts */
+/* Product - Opdivo RCC and new patient for treatment line as 2nd Line*/
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (19) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+UNION ALL
+
+/* Product - Opdivo RCC and new patient for treatment line as 3rd Line ?? Line*/
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (20) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+
+/* Product - Opdivo RCC and new patient for treatment line as ????(unknown background)*/
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in ( 21,63) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+UNION ALL
+
+/* Product - Opdivo RCC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id = dp.pset_id 
+Where serl_num = 22   
+group by 1, 2, 3,4,5, 6,7
+
+/* Product - Opdivo RCC  and END */
+
+UNION ALL
+/* PRODUCT --- OOPDIVO H&N Code starts */
+/* Product - Opdivo H&N and new patient for treatment line as 1?????(1st Regimen) */
+
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in ( 23,64) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL 
+
+/* Product - Opdivo H&N and new patient for treatment line as 2?????(2nd Regimen) */
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in ( 24,65) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL 
+
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in ( 25,66) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+UNION ALL 
+
+/* Product - Opdivo H&N and new patient for treatment line as ????(unknow background) */
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in ( 26,67) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+/* Product - Opdivo H&N and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf  on cf.cpm_id = dp.pset_id 
+Where serl_num = 27 
+group by 1, 2, 3,4,5, 6,7
+
+/* PRODUCT --- OPDIVO H&N Code end */
+
+union all
+
+
+/* PRODUCT --- Yervoy Code Starts */
+/* Product - Yervoy and new patient for treatment line as 'TOTAL' */
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (28, 29, 30,31) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+UNION ALL
+
+/* Product - Yervoy and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where serl_num=32 
+group by 1, 2, 3,4,5, 6,7
+
+/* PRODUCT --- Yervoy Code Ends*/
+UNION ALL
+
+
+/* PRODUCT --- OP+YV MELA Code Starts*/
+/* Product - OP+YV MELA and new patient for treatment line as 1st Line BRAF Mutation */
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (33,53,68,69) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+
+union all 
+
+
+/* Product - OP+YV MELA and new patient for treatment line as 2nd Line BRAF Mutation*/
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (34,55,70, 74) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+union all 
+
+
+/* Product - OP+YV MELA and new patient for treatment line as Other*/
+
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (35,36,57,59,71,72) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+
+union all 
+
+/* Product - OP+YV MELA and new patient for treatment line as TOTAL*/
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (37,52,54,56,58,75) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+
+union all 
+
+
+/* Product - OP+YV MELA and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where  serl_num = 37 
+group by 1, 2, 3,4,5, 6,7
+
+/* PRODUCT --- OP+YV MELA Code Ends*/
+union all 
+
+
+/* Product - OP+YV RCC Start */
+
+/* Product - OP+YV RCC and new patient for treatment line as 1st Line */
+
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num =38 and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (39,61) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+UNION ALL
+
+
+Select bp_par_sk, bp_sk, dp2.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+left join jp2a_cdw.d_pset dp2 on cf.cpm_id_2=dp2.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (40,62) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+/* Product - OP+YV RCC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where serl_num = 41 
+group by 1, 2, 3,4,5, 6,7
+
+
+/* Product - REV MM  Start */
+
+/* Product - REV MM and new patient*/
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+--left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (100,103,106,109,112,115) and bpct.src_dlt_flag=0
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+/* Product - REV MM and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where serl_num in (99,102,105,108,111,114) 
+group by 1, 2, 3,4,5, 6,7
+
+UNION ALL
+
+Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num IN (101,104,107,110,113,116) and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+
+/* Product - REV MM  End */
+
+-- ==================================PRESCRIPTION FOLLOW UP OBJECT CHANGES ENDS================================
+
+/* Product - OP+YV RCC End  */
+UNION ALL
+
+/* PRODUCT --- SPRYCEL Code starts*/
+/* Product - SPRYCEL and new patient for treatment line coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when  TRTT_STRT_CALD_DT_SK>FOL_UP_CALD_DT_SK and FOL_UP_CALD_DT_SK<>-1  or TRTT_STRT_CALD_DT_SK=-1 then null else cast (left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer ) end as mth_cald_dt_Sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, 
+count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP  bpct 
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num = 42 and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+union all 
+
+/* Product - SPRYCEL and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=43 
+group by 1,2, 3, 4,5,6 ,7
+
+/* PRODUCT --- SPRYCEL Code Ends*/
+union all 
+
+/* PRODUCT --- EMPLICITI Code Starts*/
+/* Product - EMPLICITI and new patient for treatment line coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when TRTT_STRT_CALD_DT_SK>TRTT_END_CALD_DT_SK and TRTT_END_CALD_DT_SK is not null or TRTT_STRT_CALD_DT_SK is null then null else cast (left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, count(bp_prd_rx_id) as pat_ct   -- trtt_strt_dt_bms__c,trtt_end_dt_bms__c,  stage columns
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num  = 44 and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+union all 
+
+/* Product - EMPLICITI and potential patient for treatment line coming from source*/
+
+Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=51 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - EMPLICITI and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=45 
+group by 1,2, 3, 4,5,6 ,7
+
+/* PRODUCT --- EMPLICITI Code Ends*/
+UNION ALL
+
+
+
+/* PRODUCT --- OPDIVO HL Code Starts*/
+/* Product - OPDIVO HL and new patient for treatment line as ã‚¢ãƒ‰ã‚»ãƒˆãƒªã‚¹æŠ•ä¸Žã‚ã‚Š */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when  trtt_strt_cald_dt_sk>trtt_end_cald_dt_sk and trtt_end_cald_dt_sk is not null or trtt_strt_cald_dt_sk is null   then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk, 
+
+case when trtt_strt_cald_dt_sk is null then trtt_strt_cald_dt_sk 
+	 when CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)=8 then CAST (trim(replace(substring(trtt_strt_cald_dt_sk,1,CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)-1),'年','')||'01')  AS INTEGER)
+   	 when CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)=7 then CAST (trim(replace(substring(trtt_strt_cald_dt_sk,1,CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)  else trtt_strt_cald_dt_sk end as trtt_strt_cald_dt_sk,
+case when trtt_end_cald_dt_sk is null then trtt_end_cald_dt_sk 
+	 when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01')AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01')AS INTEGER) else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+	 
+rx_ln_txt , prev_dis_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk --and prd_shrt_ds in ($prd12$)
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.prd_shrt_ds=dp.prd_shrt_ds
+Where serl_num=46  and prev_dis_txt like '%ブレンツキシマブ ベドチン（アドセトリス）%' 
+group by 1,2,3,4,5,6,7
+union all
+
+/* Product - OPDIVO HL and new patient for treatment line as ã‚¢ãƒ‰ã‚»ãƒˆãƒªã‚¹æŠ•ä¸Žãªã— */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when trtt_strt_cald_dt_sk>trtt_end_cald_dt_sk and trtt_end_cald_dt_sk is not null or trtt_strt_cald_dt_sk is null then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk,
+case when CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)=8 then CAST (trim(replace(substring(trtt_strt_cald_dt_sk,1,CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)=7 then CAST (trim(replace(substring(trtt_strt_cald_dt_sk,1,CAST (len(trtt_strt_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER) 
+	 else trtt_strt_cald_dt_sk end as trtt_strt_cald_dt_sk,
+case when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)
+	 else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+rx_ln_txt , prev_dis_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk --and prd_shrt_ds in ($prd12$)
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.prd_shrt_ds=dp.prd_shrt_ds
+Where serl_num=47 and ( prev_dis_txt not like ('%ブレンツキシマブ ベドチン（アドセトリス）%') or prev_dis_txt is null)
+group by 1,2,3,4,5,6,7
+
+union all 
+
+/* Product - OPDIVO HL and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where  serl_num=48 --dp.prd_Shrt_Ds in  ($prd12$) and
+group by 1,2, 3, 4,5,6 ,7
+
+
+/* PRODUCT --- OPDIVO HL Code Starts*/
+
+union all
+
+
+/* PRODUCT --- OPDIVO GC Code Ends*/
+/* Product - OPDIVO GC and new patient for treatment line as coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when left(trtt_strt_cald_dt_sk,6)>left(trtt_end_cald_dt_sk,6) and trtt_end_cald_dt_sk  is not null or trtt_strt_cald_dt_sk=-1 then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk, trtt_strt_cald_dt_sk, 
+case when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)
+	 else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+rx_ln_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk --and prd_shrt_ds in ($prd13$)
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
+Where serl_num=49 
+group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - OPDIVO GC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where  serl_num=50 
+group by 1,2, 3, 4,5,6 ,7
+/* PRODUCT --- OPDIVO GC Code Ends*/
+
+union all
+
+/* PRODUCT --- OPDIVO EC Code Ends*/
+/* Product - OPDIVO EC and new patient for treatment line as coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when left(trtt_strt_cald_dt_sk,6)>left(trtt_end_cald_dt_sk,6) and trtt_end_cald_dt_sk  is not null or trtt_strt_cald_dt_sk=-1 then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk, trtt_strt_cald_dt_sk, 
+case when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)
+	 else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+rx_ln_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=90
+group by 1,2,3,4,5,6,7
+
+union all
+
+
+/* Product - OPDIVO EC and potential patient for treatment line coming from source*/
+
+Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=91 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+
+
+union all
+
+/* Product - OPDIVO EC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where  serl_num=92
+group by 1,2, 3, 4,5,6 ,7
+
+/* PRODUCT --- OPDIVO EC Code Ends*/
+
+union all
+
+/* Product - OPDIVO CRC and new patient for treatment line as coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when left(trtt_strt_cald_dt_sk,6)>left(trtt_end_cald_dt_sk,6) and trtt_end_cald_dt_sk  is not null or trtt_strt_cald_dt_sk=-1 then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk, trtt_strt_cald_dt_sk, 
+case when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)
+	 else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+rx_ln_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk --and prd_shrt_ds in ($prd13$)
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=93
+group by 1,2,3,4,5,6,7
+
+union all
+
+
+/* Product - OPDIVO CRC and potential patient for treatment line coming from source*/
+
+Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=94 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - OPDIVO CRC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where  serl_num=95
+group by 1,2, 3, 4,5,6 ,7
+
+/* PRODUCT --- OPDIVO CRC Code Ends*/
+
+-----------------------------------------------------------------------
+
+union all
+
+/* Product - OPDIVO + YERVOY RCC and new patient for treatment line as coming from source */
+Select bp_par_sk, bp_sk,bpct.pset_sk,  case when left(trtt_strt_cald_dt_sk,6)>left(trtt_end_cald_dt_sk,6) and trtt_end_cald_dt_sk  is not null or trtt_strt_cald_dt_sk=-1 then null else cast(left(trtt_strt_cald_dt_sk,6)||'01' as integer) end as mth_cald_dt_Sk,cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt, count( bp_prd_rx_id) as pat_ct   
+from (Select bp_par_sk, bp_sk, pset_sk, trtt_strt_cald_dt_sk, 
+case when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=8 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','')||'01') AS INTEGER)
+     when CAST (len(trtt_end_cald_dt_sk) AS INTEGER)=7 then CAST(trim(replace(substring(trtt_end_cald_dt_sk,1,CAST (len(trtt_end_cald_dt_sk) AS INTEGER)-1),'年','0')||'01') AS INTEGER)
+	 else trtt_end_cald_dt_sk end as trtt_end_cald_dt_sk,
+rx_ln_txt , bp_prd_rx_id from jp2a_cdw.F_BP_PRD_RX_FOL_UP where src_dlt_flag=0 ) bpct
+left outer join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_Sk --and prd_shrt_ds in ($prd13$)
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=96
+group by 1,2,3,4,5,6,7
+
+union all
+
+
+/* Product - OPDIVO + YERVOY RCC and potential patient for treatment line coming from source*/
+
+Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
+cf.pat_type_ds,
+cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where serl_num=97 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+group by 1,2,3,4,5,6,7
+
+union all
+
+/* Product - OPDIVO + YERVOY RCC and targeted patients */
+Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
+inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
+Where  serl_num=98
+group by 1,2, 3, 4,5,6 ,7
+
+/* PRODUCT --- OPDIVO + YERVOY RCC Code Ends*/
+
+
+) total Where total.pat_ct  is not null and  pat_ct<>0 )
+ 
+SELECT *,$cycl_time_id$ AS cycl_time_id, $scen_id$ AS scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  
+from patient 
+
+union all 
+
+Select bp_par_sk, bp_sk, case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end as pset_sk, mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt, max(pat_ct) as pat_ct ,$cycl_time_id$ AS cycl_time_id, $scen_id$ AS scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  from patient 
+left outer join jp2a_cdw.d_pset dp  on patient.pset_sk=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where  subj_area_nm='patient'  and pat_type_ds='Target Patients'
+group by bp_par_sk, bp_sk,(case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end), mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt  
+ 
+union all 
+
+Select bp_par_sk, bp_sk, pset_sk, mth_cald_dt_sk, pat_type_ds, pat_type_lcl_lang_ds, trtt_ln_txt, sum(pat_ct) as pat_ct
+,$cycl_time_id$ AS cycl_time_id, $scen_id$ AS scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  from
+(select bp_par_sk, bp_sk, case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end as pset_sk, mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, dp.prd_shrt_ds as trtt_ln_txt, pat_ct from  patient 
+left outer join jp2a_cdw.d_pset dp  on patient.pset_sk=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where  subj_area_nm='patient'  and pat_type_ds in ('New Patients') and dp2.prd_shrt_ds in ('IO MELA', 'IO RCC', 'IO CRC'))
+group by bp_par_sk, bp_sk,pset_sk , mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt
+
+union all 
+
+Select bp_par_sk, bp_sk, pset_sk, mth_cald_dt_sk, pat_type_ds, pat_type_lcl_lang_ds, trtt_ln_txt, sum(pat_ct) as pat_ct
+,$cycl_time_id$ AS cycl_time_id, $scen_id$ AS scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  from
+(select bp_par_sk, bp_sk, case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end as pset_sk, mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds,  trtt_ln_txt, pat_ct from  patient 
+left outer join jp2a_cdw.d_pset dp  on patient.pset_sk=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where  subj_area_nm='patient'  and pat_type_ds in ('New Patients') and dp2.prd_shrt_ds not in ('IO MELA', 'IO RCC', 'IO CRC'))
+group by bp_par_sk, bp_sk,pset_sk , mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt
+
+
+union all 
+
+Select bp_par_sk, bp_sk, pset_sk, mth_cald_dt_sk, pat_type_ds, pat_type_lcl_lang_ds, trtt_ln_txt, sum(pat_ct) as pat_ct
+,$cycl_time_id$ AS cycl_time_id, $scen_id$ as scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  from
+(select bp_par_sk, bp_sk, case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end as pset_sk, mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds,  trtt_ln_txt, pat_ct from  patient 
+left outer join jp2a_cdw.d_pset dp  on patient.pset_sk=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where  subj_area_nm='patient'  and pat_type_ds in ('Potential Patients') and dp2.prd_shrt_ds  in ('IO EC'))
+group by bp_par_sk, bp_sk,pset_sk , mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt
+
+union all 
+
+Select bp_par_sk, bp_sk, pset_sk, mth_cald_dt_sk, pat_type_ds, pat_type_lcl_lang_ds, trtt_ln_txt, sum(pat_ct) as pat_ct
+,$cycl_time_id$ AS cycl_time_id, $scen_id$ as scen_id,  getdate() AS inrt_dt,'$inrt_by$' AS inrt_by,  getdate() AS modf_dt,'$inrt_by$' AS modf_by  from
+(select bp_par_sk, bp_sk, case when dp2.pset_sk is null then patient.pset_sk else dp2.pset_sk end as pset_sk, mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, dp.prd_shrt_ds as trtt_ln_txt, pat_ct from  patient 
+left outer join jp2a_cdw.d_pset dp  on patient.pset_sk=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where  subj_area_nm='patient'  and pat_type_ds in ('Potential Patients') and dp2.prd_shrt_ds  in ('IO CRC'))
+group by bp_par_sk, bp_sk,pset_sk , mth_cald_dt_sk, pat_type_ds,
+pat_type_lcl_lang_ds, trtt_ln_txt
+
+union all
+
+Select * from jp3a_cdw.hist_s_insn_dr_prd_mth_pat_trk;

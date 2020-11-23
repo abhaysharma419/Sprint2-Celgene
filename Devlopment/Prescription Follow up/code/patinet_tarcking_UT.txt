@@ -1,0 +1,101 @@
+summary table :  
+
+  select bp_par_sk,bp_sk,pset_sk ,mth_cald_dt_sk,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,pat_ct
+    from  jp_sandbox_ops.s_insn_dr_prd_mth_pat_trk_1102_abhay
+    minus
+    
+    select bp_par_sk,bp_sk,pset_sk ,mth_cald_dt_sk,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,pat_ct
+    from jp3a_cdw.s_insn_dr_prd_mth_pat_trk --where bp_par_sk =91962 and bp_sk=730220 and pset_sk=501 
+   ;
+   
+   
+   1018:
+   
+    select sorg_brch_sk                
+   ,sorg_sctn_sk                
+   ,srep_sk                     
+   ,bp_par_sk                   
+   ,bp_sk                       
+   ,pset_sk                     
+   ,time_bckt_sk                
+   ,sorg_lvl_ds                 
+   ,sorg_lvl_lcl_lang_ds        
+   ,sorg_brch_cd                
+   ,sorg_brch_nm                
+   ,sorg_brch_ord_num           
+   ,sorg_sctn_cd                
+   ,sorg_sctn_nm                
+   ,sorg_sctn_ord_num           
+   ,terr_cd                     
+   ,terr_nm                     
+   ,sls_wrkr_cd                 
+   ,sls_wrkr_nm                 
+   ,sls_wrkr_dual_flag          
+   ,insn_cd                     
+   ,src_insn_cd                 
+   ,insn_nm                     
+   ,insn_trgt_type_cd           
+   ,insn_tier_cd                
+   ,insn_sls_chnl_cd            
+   ,src_dr_cd                   
+   ,dr_nm                       
+   ,dr_seg_cd                   
+   ,trgt_type_txt               
+   ,trgt_type_lcl_lang_txt      
+   ,prd_shrt_ds                 
+   ,prd_sort_ord_num            
+   ,time_bckt_perd_nm           
+   ,time_bckt_perd_lcl_lang_nm  
+   ,time_bckt_sort_ord_ds       
+   ,trtt_ln_txt                 
+   ,pat_type_ds                 
+   ,pat_type_lcl_lang_ds        
+   ,totl_pat_num                
+   from jp3a_cdw.s_sorg_srep_bp_prd_time_bckt_pat_trk
+   minus 
+    select sorg_brch_sk                
+   ,sorg_sctn_sk                
+   ,srep_sk                     
+   ,bp_par_sk                   
+   ,bp_sk                       
+   ,pset_sk                     
+   ,time_bckt_sk                
+   ,sorg_lvl_ds                 
+   ,sorg_lvl_lcl_lang_ds        
+   ,sorg_brch_cd                
+   ,sorg_brch_nm                
+   ,sorg_brch_ord_num           
+   ,sorg_sctn_cd                
+   ,sorg_sctn_nm                
+   ,sorg_sctn_ord_num           
+   ,terr_cd                     
+   ,terr_nm                     
+   ,sls_wrkr_cd                 
+   ,sls_wrkr_nm                 
+   ,sls_wrkr_dual_flag          
+   ,insn_cd                     
+   ,src_insn_cd                 
+   ,insn_nm                     
+   ,insn_trgt_type_cd           
+   ,insn_tier_cd                
+   ,insn_sls_chnl_cd            
+   ,src_dr_cd                   
+   ,dr_nm                       
+   ,dr_seg_cd                   
+   ,trgt_type_txt               
+   ,trgt_type_lcl_lang_txt      
+   ,prd_shrt_ds                 
+   ,prd_sort_ord_num            
+   ,time_bckt_perd_nm           
+   ,time_bckt_perd_lcl_lang_nm  
+   ,time_bckt_sort_ord_ds       
+   ,trtt_ln_txt                 
+   ,pat_type_ds                 
+   ,pat_type_lcl_lang_ds        
+   ,totl_pat_num                
+   from jp_sandbox_ops.s_sorg_srep_bp_prd_time_bckt_pat_trk_1102_abhay;
+   
+   
+   1020:
+   
+   

@@ -1,0 +1,133 @@
+DROP VIEW IF EXISTS jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up ;
+
+CREATE OR REPLACE VIEW jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up
+(
+  sorg_unit_sk,
+  bp_par_sk,
+  bp_sk,
+  pset_sk,
+  pat_brd_inatn_cald_dt_sk,
+  src_crea_dt_sk,
+  fol_up_cald_dt_sk,
+  trtt_strt_cald_dt_sk,
+  trtt_end_cald_dt_sk,
+  plan_devy_cald_dt_sk,
+  strt_cald_dt_sk,
+  bp_prd_rx_id,
+  bus_unit_cd,
+  regn_cd,
+  dst_cd,
+  sls_wrkr_cd,
+  dual_terr_flag,
+  insn_cd,
+  insn_dcf_dsf_cd,
+  insn_sls_chnl_cd,
+  insn_tier_cd,
+  dr_seg_cd,
+  dr_dcf_cd,
+  rf_cd,
+  terr_cd,
+  bus_unit_nm,
+  regn_nm,
+  dst_nm,
+  bus_unit_lcl_nm,
+  regn_lcl_nm,
+  dst_lcl_nm,
+  terr_lcl_nm,
+  sls_wrkr_nm,
+  prd_nm,
+  prd_grp_nm,
+  insn_nm,
+  insn_trgt_type_nm,
+  dr_nm,
+  stg_of_dis_nm,
+  age_txt,
+  amt_of_devy_dsg_txt,
+  cmbn_medc_txt,
+  cmplctns_txt,
+  efct_1st_ln_txt,
+  efct_2nd_ln_txt,
+  efct_3rd_ln_txt,
+  efct_4th_ln_txt,
+  gndr_txt,
+  HSTGY_TXT,
+  PD_L1_STA_TXT,
+  hcp_intention_txt,
+  high_risk_chromosome_abnormality_txt,
+  msi_test_time_txt,
+  mtx_wkly_rx_cmb_use_txt,
+  pat_sta_cmplctn_txt,
+  pat_cnf_txt,
+  perd_1st_ln_txt,
+  perd_2nd_ln_txt,
+  perd_3rd_ln_txt,
+  perd_4th_ln_txt,
+  prev_dis_txt,
+  PREV_TRTT_REGM_TXT,
+  regm_1st_ln_txt,
+  regm_2nd_ln_txt,
+  regm_3rd_ln_txt,
+  regm_4th_ln_txt,
+  rlps_type_txt,
+  rx_ln_txt,
+  spctby_txt,
+  sntvy_pomalidomide_txt,
+  THER_AREA_TXT,
+  trtt_expc_prd_txt,
+  trtt_hist_pomalidomide_txt,
+  trtt_ln_txt,
+  acpa_dsg_ds,
+  bio_mlcl_use_ds,
+  diags_ds,
+  trtt_termn_reas_ds,
+  wt_num,
+  dis_dur_ct,
+  mtx_wkly_rx_dose_ct,
+  trgt_ind,
+  pat_brd_inatn_cald_dt,
+  cald_dt,
+  trtt_strt_mth_dt,
+  trtt_end_mth_dt,
+  trtt_strt_cald_dt,
+  trtt_end_cald_dt,
+  fol_up_cald_dt,
+  plan_devy_cald_dt,
+  strt_cald_dt,
+  last_modf_ts,
+  cycl_time_id,
+  scen_id,
+  inrt_ts,
+  inrt_by_nm,
+  modf_ts,
+  modf_by_nm,
+  snp_id
+)
+AS 
+ SELECT f.sorg_unit_sk, f.par_bp_sk AS bp_par_sk, f.bp_sk, f.pset_sk, f.pat_brd_inatn_cald_dt_sk, f.src_crea_dt_sk, f.fol_up_cald_dt_sk, f.trtt_strt_cald_dt_sk, f.trtt_end_cald_dt_sk, f.plan_devy_cald_dt_sk, f.strt_cald_dt_sk, f.bp_prd_rx_id, f.bus_unit_cd, f.regn_cd, f.dst_cd, f.sls_wrkr_cd, f.dual_terr_flag, f.insn_cd, f.insn_dcf_dsf_cd, 
+        CASE
+            WHEN f.insn_sls_chnl_cd IS NULL THEN '-'::character varying
+            ELSE f.insn_sls_chnl_cd
+        END AS insn_sls_chnl_cd, 
+        CASE
+            WHEN f.insn_tier_cd IS NULL THEN '-'::character varying
+            ELSE f.insn_tier_cd
+        END AS insn_tier_cd, 
+        CASE
+            WHEN f.dr_seg_cd IS NULL THEN '-'::character varying
+            ELSE f.dr_seg_cd
+        END AS dr_seg_cd, f.dr_dcf_cd, f.rf_cd, f.terr_cd, f.bus_unit_nm, f.regn_nm, f.dst_nm, f.bus_unit_lcl_lang_nm AS bus_unit_lcl_nm, f.regn_lcl_lang_nm AS regn_lcl_nm, f.dst_lcl_lang_nm AS dst_lcl_nm, f.terr_lcl_lang_nm AS terr_lcl_nm, f.sls_wrkr_nm, f.prd_nm, f.prd_grp_nm, f.insn_nm, 
+        CASE
+            WHEN f.insn_trgt_type_nm IS NULL THEN '-'::character varying
+            ELSE f.insn_trgt_type_nm
+        END AS insn_trgt_type_nm, f.dr_nm, f.stg_of_dis_nm, f.age_txt, f.amt_of_devy_dsg_txt, f.cmbn_medc_txt, f.cmplctns_txt, f.efct_1st_ln_txt, f.efct_2nd_ln_txt, f.efct_3rd_ln_txt, f.efct_4th_ln_txt, f.gndr_txt, F.HSTGY_TXT,F.PD_L1_STA_TXT,f.hcp_intn_txt AS hcp_intention_txt, f.high_risk_chrmsm_abnrml_txt AS high_risk_chromosome_abnormality_txt, f.msi_test_time_txt, f.mtx_wkly_rx_cmb_use_txt, f.pat_sta_cmplctn_txt, f.pat_cnf_txt, f.perd_1st_ln_txt, f.perd_2nd_ln_txt, f.perd_3rd_ln_txt, f.perd_4th_ln_txt, f.prev_dis_txt,F.PREV_TRTT_REGM_TXT, f.regm_1st_ln_txt, f.regm_2nd_ln_txt, f.regm_3rd_ln_txt, f.regm_4th_ln_txt, f.rlps_type_txt, f.rx_ln_txt, f.spctby_txt, f.sntvy_pomalidomide_txt, F.THER_AREA_TXT,f.trtt_expc_prd_txt, f.trtt_hist_pomalidomide_txt, f.trtt_ln_txt, f.acpa_dsg_ds, f.bio_mlcl_use_ds, f.diags_ds, f.trtt_termn_reas_ds, f.wt_num, f.dis_dur_ct, f.mtx_wkly_rx_dose_ct, 
+        CASE
+            WHEN f.trgt_ind::character varying::text = 1::character varying::text THEN 'ターゲット医師'::character varying::character varying(400)
+            ELSE 'ノンターゲット医師'::character varying::character varying(400)
+        END AS trgt_ind, to_date(f.pat_brd_inatn_cald_dt_sk::character varying::text, 'yyyymmdd'::character varying::text) AS pat_brd_inatn_cald_dt, to_date(f.src_crea_dt_sk::character varying::text, 'YYYYMMDD'::character varying::text) AS cald_dt, to_date(("left"(f.trtt_strt_cald_dt_sk::character varying::text, 6) || '01'::character varying::text)::integer::character varying::text, 'YYYYMMDD'::character varying::text) AS trtt_strt_mth_dt, to_date(("left"(f.trtt_end_cald_dt_sk::character varying::text, 6) || '01'::character varying::text)::integer::character varying::text, 'YYYYMMDD'::character varying::text) AS trtt_end_mth_dt, to_date(f.trtt_strt_cald_dt_sk::character varying::text, 'YYYYMMDD'::character varying::text) AS trtt_strt_cald_dt, to_date(f.trtt_end_cald_dt_sk::character varying::text, 'YYYYMMDD'::character varying::text) AS trtt_end_cald_dt, to_date(f.fol_up_cald_dt_sk::character varying::text, 'YYYYMMDD'::character varying::text) AS fol_up_cald_dt, to_date(f.plan_devy_cald_dt_sk::character varying::text, 'YYYYMMDD'::character varying::text) AS plan_devy_cald_dt, to_date("left"(f.strt_cald_dt_sk::character varying::text, 6)::character varying::integer::character varying::text, 'YYYYMMDD'::character varying::text) AS strt_cald_dt, convert_timezone('GMT'::character varying::text, 'JST'::character varying::text, f.last_modf_ts) AS last_modf_ts, f.cycl_time_id, f.scen_id, f.inrt_ts, f.inrt_by_nm, f.modf_ts, f.modf_by_nm, f.snp_id
+   FROM jp_rpt_a.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up f
+  WHERE f.snp_id = (( SELECT "max"(rs.snp_id) AS max_snp_id_1
+           FROM jp_ops.cntl_rpt_snp rs
+          WHERE lower(rs.tbl_nm::text) = 's_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up'::character varying::text AND rs.actv_flag = 1)) AND COALESCE(f.trtt_strt_cald_dt_sk, 10) <> -1 AND COALESCE(f.plan_devy_cald_dt_sk, 10) <> -1 AND f.bp_sk <> -1;
+
+
+

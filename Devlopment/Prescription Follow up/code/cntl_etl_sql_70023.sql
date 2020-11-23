@@ -1,0 +1,71 @@
+UPDATE apac_orch.cntl_etl_sql
+   SET sql_txt = 'INSERT INTO jp2_int.ITMD_3_S_SORG_SLS_WRKR_BP_PRD_TIME_BCKT_SRVY_FOL_UP
+SELECT 
+bpct.bp_par_sk						AS BP_PAR_SK, 
+bpct.bp_sk							AS BP_SK, 
+CASE  when rlup.pset_sk =319 then dp2.pset_sk
+WHEN rlup.pset_sk IS NOT NULL THEN rlup.pset_sk ELSE dp.pset_sk END AS pset_sk,
+case when rlup.pset_sk =319 then dp.pset_sk
+when dp2.pset_sk is null then nvl(rlup.pset_sk,dp.pset_sk) else  dp2.pset_sk  end as prd_grp_sk, 
+bpct.PAT_BRD_INATN_CALD_DT_SK		AS PAT_BRD_INATN_CALD_DT_SK,
+bpct.src_crea_dt_sk					AS src_crea_dt_sk,
+bpct.FOL_UP_CALD_DT_SK				AS FOL_UP_CALD_DT_SK, 
+bpct.TRTT_STRT_CALD_DT_SK			AS TRTT_STRT_CALD_DT_SK,
+bpct.TRTT_END_CALD_DT_SK			AS TRTT_END_CALD_DT_SK,
+bpct.PLAN_DEVY_CALD_DT_SK			AS PLAN_DEVY_CALD_DT_SK,  
+bpct.folup_nm						AS BP_PRD_RX_ID, 
+bpct.RF_CD							AS RF_CD,
+bpct.STG_OF_DIS_NM		           	AS STG_OF_DIS_NM,
+bpct.AGE_NUM						AS AGE_TXT,
+Case when dp3.prd_ds in (''EMPLICITI'',''ISTODAX'',''POMALYST'',''REVLIMID ATLL'',''REVLIMID LYMPHOMA'',''REVLIMID MDS'',''REVLIMID MM'',''SPRYCEL'') then bpct.AMT_OF_DEVY_DSG_TXT 
+else  bpct.rx_path_txt 	end AS AMT_OF_DEVY_DSG_TXT ,  
+bpct.CMBN_MEDC_TXT					AS CMBN_MEDC_TXT,
+bpct.CMPLCTNS_TXT					AS CMPLCTNS_TXT,
+bpct.EFCT_1ST_LN_TXT				AS EFCT_1ST_LN_TXT,
+bpct.EFCT_2ND_LN_TXT				AS EFCT_2ND_LN_TXT,
+bpct.EFCT_3RD_LN_TXT				AS EFCT_3RD_LN_TXT,
+bpct.EFCT_4TH_LN_TXT				AS EFCT_4TH_LN_TXT,
+bpct.GNDR_TXT						AS GNDR_TXT,
+bpct.HSTGY_TXT						AS HSTGY_TXT,
+bpct.PD_L1_STA_TXT					AS PD_L1_STA_TXT,
+bpct.HCP_INTENTION_TXT				AS HCP_INTENTION_TXT,  		 -- HCP_      ??
+bpct.HIGH_RISK_CHROMOSOME_ABNORMALITY_TXT		AS HIGH_RISK_CHROMOSOME_ABNORMALITY_TXT,
+bpct.msi_test_time_txt as msi_test_time_txt,
+bpct.MTX_WKLY_RX_CMB_USE_IND		AS MTX_WKLY_RX_CMB_USE_TXT,
+bpct.PAT_STA_CMPLCTN_TXT	 		AS PAT_STA_CMPLCTN_TXT,
+bpct.PAT_CNF_TXT					AS PAT_CNF_TXT,  -- PAT_CNF
+bpct.PERD_1ST_LN_TXT				AS PERD_1ST_LN_TXT,
+bpct.PERD_2ND_LN_TXT				AS PERD_2ND_LN_TXT,
+bpct.PERD_3RD_LN_TXT				AS PERD_3RD_LN_TXT,
+bpct.PERD_4TH_LN_TXT				AS PERD_4TH_LN_TXT,
+bpct.PREV_DIS_TXT					AS PREV_DIS_TXT,
+bpct.PREV_TRTT_REGM_TXT				AS PREV_TRTT_REGM_TXT,
+
+bpct.REGM_1ST_LN_TXT				AS REGM_1ST_LN_TXT,
+bpct.REGM_2ND_LN_TXT				AS REGM_2ND_LN_TXT,
+bpct.REGM_3RD_LN_TXT				AS REGM_3RD_LN_TXT,
+bpct.REGM_4TH_LN_TXT				AS REGM_4TH_LN_TXT,
+bpct.rlps_type_txt 					AS rlps_type_txt,
+bpct.RX_LN_TXT 						AS RX_LN_TXT ,
+bpct.spctby_txt						AS spctby_txt,
+bpct.SNTVY_POMALIDOMIDE_TXT 		AS SNTVY_POMALIDOMIDE_TXT,
+bpct.THER_AREA_TXT					AS THER_AREA_TXT,
+bpct.trtt_expc_prd_txt				AS trtt_expc_prd_txt,
+bpct.TRTT_HIST_POMALIDOMIDE_TXT		AS TRTT_HIST_POMALIDOMIDE_TXT,
+bpct.TRTT_LN_DS 					AS TRTT_LN_DS,--> current prescription line 
+bpct.ACPA_DSG_DS					AS ACPA_DSG_DS,
+bpct.BIO_MLCL_USE_DS				AS BIO_MLCL_USE_DS,
+bpct.DIAGS_DS						AS DIAGS_DS,
+bpct.TRTT_TERMN_REAS_DS				AS TRTT_TERMN_REAS_DS,  	-- TRTT_TERMN_REAS
+bpct.WT_NUM							AS WT_NUM,
+bpct.DIS_DUR_CT						AS DIS_DUR_CT,
+bpct.MTX_WKLY_RX_DOSE_CT			AS MTX_WKLY_RX_DOSE_CT,
+bpct.SRC_MODF_TS					AS LAST_MODF_TS
+FROM jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
+inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
+left outer join jp2a_cdw.d_pset dp3  on (CASE WHEN rlup.pset_sk IS NOT NULL THEN rlup.pset_sk ELSE dp.pset_sk END) = dp3.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp3.pset_id = pg.pset_id and pg.subj_area_nm=''patient''   
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id = dp2.pset_id
+Where  src_dlt_flag=0;'
+WHERE sql_id = 70023;

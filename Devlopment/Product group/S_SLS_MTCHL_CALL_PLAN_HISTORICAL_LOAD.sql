@@ -1,0 +1,264 @@
+ update jp3a_cdw.S_SLS_MTCHL_CALL_PLAN
+ set pset_sk =3433
+ where pset_sk  = 2696 and strt_dt_sk <= 20200901;
+ 
+ CREATE TABLE jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+(
+   bp_sk                     integer,
+   par_bp_sk                 integer,
+   sorg_sk                   integer,
+   sls_wrkr_sk               integer,
+   pset_sk                   integer,
+   call_presn_chnl_sk        integer,
+   strt_dt_sk                integer,
+   end_dt_sk                 integer,
+   ctry_cd                   varchar(2),
+   mast_aligt_id             varchar(50),
+   mtchl_call_id             varchar(20),
+   mtchl_call_plan_id        varchar(20),
+   mtchl_call_plan_prd_id    varchar(20),
+   mtchl_call_plan_trgt_id   varchar(20),
+   mtchl_call_plan_nm        varchar(50),
+   mtchl_call_plan_type_nm   varchar(50),
+   mtchl_call_nm             varchar(50),
+   mtchl_call_type_nm        varchar(50),
+   mtchl_call_ds             varchar(50),
+   pm_seg_txt                varchar(255),
+   pm_trgt_txt               varchar(255),
+   cust_mast_afln_sta_ds     varchar(255),
+   mtchl_call_ovrch_thrh_ct  numeric(18,9),
+   mtchl_call_udrch_thrh_ct  numeric(18,9),
+   chnl_atvy_actl_call_ct    numeric(18,9),
+   chnl_atvy_trgt_call_ct    numeric(18,9),
+   chnl_atvy_max_call_ct     numeric(18,9),
+   chnl_atvy_rmn_call_ct     numeric(18,9),
+   chnl_itrtn_actl_call_ct   numeric(18,9),
+   chnl_itrtn_earn_call_ct   numeric(18,9),
+   chnl_itrtn_trgt_call_ct   numeric(18,9),
+   prd_atvy_trgt_call_ct     numeric(18,9),
+   prd_atvy_max_call_ct      numeric(18,9),
+   prd_atvy_rmn_call_ct      numeric(18,9),
+   prd_atvy_actl_call_ct     numeric(18,9),
+   prd_itrtn_actl_call_ct    numeric(18,9),
+   prd_itrtn_earn_call_ct    numeric(18,9),
+   prd_itrtn_trgt_call_ct    numeric(18,9),
+   prd_atmnt_call_pct        numeric(18,9),
+   chnl_atmnt_call_pct       numeric(18,9),
+   src_dlt_flag              integer,
+   cycl_time_id              integer,
+   scen_id                   integer,
+   inrt_ts                   timestamp       DEFAULT ('now'::character varying)::timestamp without time zone,
+   inrt_by_nm                varchar(50),
+   modf_ts                   timestamp       DEFAULT ('now'::character varying)::timestamp without time zone,
+   modf_by_nm                varchar(50)
+);
+
+  -- HEMA ATL
+ insert into  jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+ 
+ select * from  jp3a_cdw.S_SLS_MTCHL_CALL_PLAN where strt_dt_sk <= 20200901 and pset_sk in (3227,3079,804,1798);
+ 
+  update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+ set pset_sk =3435
+ where pset_sk  = 3227 and
+ strt_dt_sk <= 20200901 ;
+ 
+  -- HEMA MDS
+ 
+   update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+ set pset_sk =3430
+ where pset_sk  = 3430 and
+ strt_dt_sk <= 20200901 ;
+ 
+ -- HEMA CML
+ 
+    update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+ set pset_sk =3434
+ where pset_sk  = 804 and
+ strt_dt_sk <= 20200901 ;
+ 
+ 
+  -- EM
+ 
+    update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
+ set pset_sk =3431
+ where pset_sk  = 1798 and
+ strt_dt_sk <= 20200901 ;
+ 
+ insert into jp3a_cdw.S_SLS_MTCHL_CALL_PLAN
+
+select * from jp_sandbox_ops.s_sls_mtchl_call_plan_hist;
+
+create table jp_sandbox_ops.s_sls_mtchl_call_plan_prd_grp_1118 as select * from jp3a_Cdw.s_sls_mtchl_call_plan limit 0;
+
+ 
+
+INSERT INTO   jp_sandbox_ops.s_sls_mtchl_call_plan_prd_grp_1118  
+(
+  bp_sk,
+  par_bp_sk,
+  sorg_sk,
+  sls_wrkr_sk,
+  pset_sk,
+  call_presn_chnl_sk,
+  strt_dt_sk,
+  end_dt_sk,
+  ctry_cd,
+  mast_aligt_id,
+  mtchl_call_id,
+  mtchl_call_plan_id,
+  mtchl_call_plan_prd_id,
+  mtchl_call_plan_trgt_id,
+  mtchl_call_plan_nm,
+  mtchl_call_plan_type_nm,
+  mtchl_call_nm,
+  mtchl_call_type_nm,
+  mtchl_call_ds,
+  pm_seg_txt,
+  pm_trgt_txt,
+  cust_mast_afln_sta_ds,
+  mtchl_call_ovrch_thrh_ct,
+  mtchl_call_udrch_thrh_ct,
+  chnl_atvy_actl_call_ct,
+  chnl_atvy_trgt_call_ct,
+  chnl_atvy_max_call_ct,
+  chnl_atvy_rmn_call_ct,
+  chnl_itrtn_actl_call_ct,
+  chnl_itrtn_earn_call_ct,
+  chnl_itrtn_trgt_call_ct,
+  prd_atvy_trgt_call_ct,
+  prd_atvy_max_call_ct,
+  prd_atvy_rmn_call_ct,
+  prd_atvy_actl_call_ct,
+  prd_itrtn_actl_call_ct,
+  prd_itrtn_earn_call_ct,
+  prd_itrtn_trgt_call_ct,
+  prd_atmnt_call_pct,
+  chnl_atmnt_call_pct,
+  src_dlt_flag,
+  cycl_time_id,
+  scen_id,
+  inrt_ts,
+  inrt_by_nm,
+  modf_ts,
+  modf_by_nm
+)
+SELECT bp_sk,
+       par_bp_sk,
+       sorg_sk,
+       sls_wrkr_sk,
+       pset_sk,
+       call_presn_chnl_sk,
+       strt_dt_sk,
+       end_dt_sk,
+       ctry_cd,
+       MAX(mast_aligt_id),
+       MAX(mtchl_call_id),
+       MAX(mtchl_call_plan_id),
+       MAX(mtchl_call_plan_prd_id),
+       MAX(mtchl_call_plan_trgt_id),
+       MAX(mtchl_call_plan_nm),
+       MAX(mtchl_call_plan_type_nm),
+       MAX(mtchl_call_nm),
+       MAX(mtchl_call_type_nm),
+       MAX(mtchl_call_ds),
+       MAX(pm_seg_txt),
+       MAX(pm_trgt_txt),
+       MAX(cust_mast_afln_sta_ds),
+       MAX(mtchl_call_ovrch_thrh_ct),
+       MAX(mtchl_call_udrch_thrh_ct),
+       MAX(chnl_atvy_actl_call_ct),
+       MAX(chnl_atvy_trgt_call_ct),
+       MAX(chnl_atvy_max_call_ct),
+       MAX(chnl_atvy_rmn_call_ct),
+       MAX(chnl_itrtn_actl_call_ct),
+       MAX(chnl_itrtn_earn_call_ct),
+       MAX(chnl_itrtn_trgt_call_ct),
+       MAX(prd_atvy_trgt_call_ct),
+       MAX(prd_atvy_max_call_ct),
+       MAX(prd_atvy_rmn_call_ct),
+       MAX(prd_atvy_actl_call_ct),
+       MAX(prd_itrtn_actl_call_ct),
+       MAX(prd_itrtn_earn_call_ct),
+       MAX(prd_itrtn_trgt_call_ct),
+       MAX(prd_atmnt_call_pct),
+       MAX(chnl_atmnt_call_pct),
+       MAX(src_dlt_flag),
+       MAX(cycl_time_id),
+       MAX(scen_id),
+       MAX(inrt_ts),
+       MAX(inrt_by_nm),
+       MAX(modf_ts),
+       MAX(modf_by_nm)
+FROM (SELECT a1.bp_sk,
+             a1.par_bp_sk,
+             a1.sorg_sk,
+             a1.sls_wrkr_sk,
+             CASE
+               WHEN a2.pset_Sk IS NULL THEN a1.pset_sk
+               ELSE a2.pset_sk
+             END AS pset_sk,
+             a1.call_presn_chnl_sk,
+             a1.strt_dt_sk,
+             a1.end_dt_sk,
+             a1.ctry_cd,
+             a1.mast_aligt_id,
+             a1.mtchl_call_id,
+             a1.mtchl_call_plan_id,
+             a1.mtchl_call_plan_prd_id,
+             a1.mtchl_call_plan_trgt_id,
+             a1.mtchl_call_plan_nm,
+             a1.mtchl_call_plan_type_nm,
+             a1.mtchl_call_nm,
+             a1.mtchl_call_type_nm,
+             a1.mtchl_call_ds,
+             a1.pm_seg_txt,
+             a1.pm_trgt_txt,
+             a1.cust_mast_afln_sta_ds,
+             a1.mtchl_call_ovrch_thrh_ct,
+             a1.mtchl_call_udrch_thrh_ct,
+             a1.chnl_atvy_actl_call_ct,
+             a1.chnl_atvy_trgt_call_ct,
+             a1.chnl_atvy_max_call_ct,
+             a1.chnl_atvy_rmn_call_ct,
+             a1.chnl_itrtn_actl_call_ct,
+             a1.chnl_itrtn_earn_call_ct,
+             a1.chnl_itrtn_trgt_call_ct,
+             a1.prd_atvy_trgt_call_ct,
+             a1.prd_atvy_max_call_ct,
+             a1.prd_atvy_rmn_call_ct,
+             a1.prd_atvy_actl_call_ct,
+             a1.prd_itrtn_actl_call_ct,
+             a1.prd_itrtn_earn_call_ct,
+             a1.prd_itrtn_trgt_call_ct,
+             a1.prd_atmnt_call_pct,
+             a1.chnl_atmnt_call_pct,
+             a1.src_dlt_flag,
+             a1.cycl_time_id,
+             a1.scen_id,
+             a1.inrt_ts,
+             a1.inrt_by_nm,
+             a1.modf_ts,
+             a1.modf_by_nm
+      FROM jp2a_cdw.f_sls_mtchl_call_plan a1
+        LEFT OUTER JOIN jp2a_cdw.d_pset dp ON a1.pset_sk = dp.pset_sk
+        INNER JOIN jp_ops.m_pset_prd_grp a3
+                ON dp.pset_id = a3.pset_id
+               AND a3.subj_area_nm = 'planned_dtl'
+        LEFT OUTER JOIN jp2a_Cdw.d_pset a2 ON a3.prd_grp_id = a2.pset_id 
+        WHERE SUBSTRING(a1.strt_dt_sk,1,6) >= (202007)
+        and a1.src_dlt_flag = 0 and a1.pset_sk IN (1798,1728,3080,3078,3076))
+GROUP BY bp_sk,
+         par_bp_sk,
+         sorg_sk,
+         sls_wrkr_sk,
+         pset_sk,
+         call_presn_chnl_sk,
+         strt_dt_sk,
+         end_dt_sk,
+         ctry_cd;
+         
+         insert into jp3a_cdw.s_sls_mtchl_call_plan
+         select * from jp_sandbox_ops.s_sls_mtchl_call_plan_prd_grp_1118;
+
+ 
