@@ -1,0 +1,14 @@
+create table jp_sandbox_ops.itmd_3_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123 
+as select * from jp2_int.itmd_3_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up ;
+
+create table jp_sandbox_ops.itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123 
+as select * from jp2_int.itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up ;
+
+create table jp_sandbox_ops.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up_1123 as
+select * from jp3a_cdw.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up;
+
+create table jp_sandbox_ops.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123 
+as select * from jp_rpt_a.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+
+create table jp_sandbox_ops.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123 
+as select * from jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up

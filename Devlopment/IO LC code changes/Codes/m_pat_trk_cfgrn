@@ -1,0 +1,11 @@
+INSERT INTO jp_ops.m_pat_trk_cfgrn (serl_num,prd_shrt_ds,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,extl_id_vod__c,qstn_txt,ord_num,cpm_id,cpm_id_2) 
+VALUES
+  (1074,'OPYV LC','Target Patients','対象患者数','TOTAL',NULL,NULL,NULL,'2016230','2016230'),
+  (1075,'OPYV LC','New Patients','新規患者数',NULL,NULL,NULL,NULL,'2016230','2016230'),
+  (1076,'OPYV LC','Potential Patients','候補症例数',NULL,NULL,NULL,NULL,'2016230','2016230'),
+  (1078,'OP Chemo LC','Target Patients','対象患者数','TOTAL',NULL,NULL,NULL,'2016229','2016229'),
+  (1079,'OP Chemo LC','New Patients','新規患者数',NULL,NULL,NULL,NULL,'2016229','2016229'),
+  (1080,'OP Chemo LC','Potential Patients','候補症例数',NULL,NULL,NULL,NULL,'2016229','2016229'),
+  (1081,'OPYV Chemo LC','Target Patients','対象患者数','TOTAL',NULL,NULL,NULL,'2016231','2016231'),
+  (1082,'OPYV Chemo LC','New Patients','新規患者数',NULL,NULL,NULL,NULL,'2016231','2016231'),
+  (1083,'OPYV Chemo LC','Potential Patients','候補症例数',NULL,NULL,NULL,NULL,'2016231','2016231');

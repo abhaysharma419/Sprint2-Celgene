@@ -1,0 +1,5 @@
+INSERT INTO jp_ops.m_pset_prd_grp (prd_grp_id,pset_id,prd_grp_nm,prd_shrt_ds,prd_ds,subj_area_nm,prd_grp_flag,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  ('2012085','2016230','IO LC','OPYV LC','OPDIVO+YERVOY LC','patient',1,320180817,1,TIMESTAMP '2018-10-23 12:33:46.000','bms_ops',TIMESTAMP '2018-10-23 12:33:46.000','bms_ops'),
+  ('2012085','2016229','IO LC','OP Chemo LC','OPDIVO+PARAPLATIN LUNG','patient',1,320180817,1,TIMESTAMP '2018-10-23 12:33:46.000','bms_ops',TIMESTAMP '2018-10-23 12:33:46.000','bms_ops'),
+  ('2012085','2016231','IO LC','OPYV Chemo LC','OPDIVO+YERVOY+PARAPLATIN LUNG','patient',1,320180817,1,TIMESTAMP '2018-10-23 12:33:46.000','bms_ops',TIMESTAMP '2018-10-23 12:33:46.000','bms_ops');
