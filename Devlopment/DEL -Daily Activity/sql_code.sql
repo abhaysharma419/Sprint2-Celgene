@@ -261,59 +261,37 @@ select *,(select coalesce(max(snp_id),0)+1 snp_id from  jp_ops.cntl_rpt_snp
 
 
 
-CREATE OR REPLACE VIEW jp_rpt_v.v_RPT_INSN_DR_PRD_ALL_DAILY_ATVY
+CREATE OR REPLACE VIEW jp_rpt_v.v_rpt_insn_dr_prd_all_daily_atvy
 (
-BP_PAR_SK				
-,BP_SK					
-,PSET_SK					
-,CALD_DT_SK				
-,INSN_CD					
-,DR_CD					
-,INSN_NM					
-,DR_NM					
-,PGRP_NM					
-,ACTL_DTL_DAILY_CT		
-,APNTT_DTL_DAILY_CT		
-,APV_EMAIL_SENT_DAILY_CT 
-,CO_VIST_DTL_DAILY_CT    
-,EXPL_MTG_DTL_DAILY_CT   
-,IVA_DTL_DALY_CT         
-,P2P_DAILY_CT            
-,WEB_SEMINAR_DAILY_CT    
-,CYCL_TIME_ID			
-,SCEN_ID					
-,INRT_TS					
-,INRT_BY_NM				
-,MODF_TS					
-,MODF_BY_NM				
-,snp_id	
-,yv_onc2_disp_ind
+  bp_par_sk,
+  bp_sk,
+  pset_sk,
+  cald_dt_sk,
+  insn_cd,
+  dr_cd,
+  insn_nm,
+  dr_nm,
+  pgrp_nm,
+  actl_dtl_daily_ct,
+  apntt_dtl_daily_ct,
+  apv_email_sent_daily_ct,
+  co_vist_dtl_daily_ct,
+  expl_mtg_dtl_daily_ct,
+  iva_dtl_daly_ct,
+  p2p_daily_ct,
+  web_seminar_daily_ct,
+  cycl_time_id,
+  scen_id,
+  inrt_ts,
+  inrt_by_nm,
+  modf_ts,
+  modf_by_nm,
+  snp_id,
+  yv_onc2_disp_ind
 )
 AS 
- SELECT BP_PAR_SK				
-,BP_SK					
-,PSET_SK					
-,CALD_DT_SK				
-,INSN_CD					
-,DR_CD					
-,INSN_NM					
-,DR_NM					
-,PGRP_NM					
-,ACTL_DTL_DAILY_CT		
-,APNTT_DTL_DAILY_CT		
-,APV_EMAIL_SENT_DAILY_CT 
-,CO_VIST_DTL_DAILY_CT    
-,EXPL_MTG_DTL_DAILY_CT   
-,IVA_DTL_DALY_CT         
-,P2P_DAILY_CT            
-,WEB_SEMINAR_DAILY_CT    
-,CYCL_TIME_ID			
-,SCEN_ID					
-,INRT_TS					
-,INRT_BY_NM				
-,MODF_TS					
-,MODF_BY_NM				
-, snp_id
-,'Y' AS yv_onc2_disp_ind
-   FROM jp_rpt_a.RPT_INSN_DR_PRD_ALL_DAILY_ATVY ;
-
+ SELECT rpt_insn_dr_prd_all_daily_atvy.bp_par_sk, rpt_insn_dr_prd_all_daily_atvy.bp_sk, rpt_insn_dr_prd_all_daily_atvy.pset_sk, rpt_insn_dr_prd_all_daily_atvy.cald_dt_sk, rpt_insn_dr_prd_all_daily_atvy.insn_cd, rpt_insn_dr_prd_all_daily_atvy.dr_cd, rpt_insn_dr_prd_all_daily_atvy.insn_nm, rpt_insn_dr_prd_all_daily_atvy.dr_nm, rpt_insn_dr_prd_all_daily_atvy.pgrp_nm, rpt_insn_dr_prd_all_daily_atvy.actl_dtl_daily_ct, rpt_insn_dr_prd_all_daily_atvy.apntt_dtl_daily_ct, rpt_insn_dr_prd_all_daily_atvy.apv_email_sent_daily_ct, rpt_insn_dr_prd_all_daily_atvy.co_vist_dtl_daily_ct, rpt_insn_dr_prd_all_daily_atvy.expl_mtg_dtl_daily_ct, rpt_insn_dr_prd_all_daily_atvy.iva_dtl_daly_ct, rpt_insn_dr_prd_all_daily_atvy.p2p_daily_ct, rpt_insn_dr_prd_all_daily_atvy.web_seminar_daily_ct, rpt_insn_dr_prd_all_daily_atvy.cycl_time_id, rpt_insn_dr_prd_all_daily_atvy.scen_id, rpt_insn_dr_prd_all_daily_atvy.inrt_ts, rpt_insn_dr_prd_all_daily_atvy.inrt_by_nm, rpt_insn_dr_prd_all_daily_atvy.modf_ts, rpt_insn_dr_prd_all_daily_atvy.modf_by_nm, rpt_insn_dr_prd_all_daily_atvy.snp_id, 'Y' AS yv_onc2_disp_ind
+   FROM jp_rpt_a.rpt_insn_dr_prd_all_daily_atvy
+     WHERE rpt_insn_dr_prd_all_daily_atvy.snp_id = (( SELECT "max"(cntl_rpt_snp.snp_id) AS "max"
+           FROM jp_ops.cntl_rpt_snp
+          WHERE lower(cntl_rpt_snp.tbl_nm)::text = 'rpt_insn_dr_prd_all_daily_atvy'::character varying::text));
