@@ -1,0 +1,46 @@
+Insert into jp2_int.dr_actl_pln
+WITH tab AS (
+  SELECT distinct p.par_bp_sk as bp_par_sk, p.bp_sk, p.cald_dt_sk, p.presn_id, cast(p.apntt_ind AS INTEGER) AS apntt_ind,
+  cast(p.coch_acct_vist_ind AS INTEGER) AS coach_acct_vist_ind,
+  cast(p.bus_acct_vist_ind AS INTEGER) AS bus_acct_vist_ind,  p.pset_sk, clm_ind AS iva_flag, 
+  prd_stgy_nm AS dtl_1, prd_tact_nm AS dtl_2, NULL AS dtl_3
+  FROM jp3a_cdw.s_insn_bp_presn_dtl  p
+  LEFT OUTER JOIN (
+    SELECT *
+   FROM (
+    SELECT row_number() OVER (PARTITION BY d_pset_sk, presn_id order by d_pset_sk ) AS ordr, *
+    FROM (select nvl(mp.pset_sk,pt.pset_sk) AS d_pset_sk, mt.presn_dcsn_id, mt.presn_id, mt.prd_stgy_sk, mt.prd_tact_sk from jp2a_cdw.f_presn_dcsn mt
+ left outer join jp2_int.rpt_prd_rolup_atvy_temp prd 
+ on prd.prd_brd_grp_sk = mt.pset_sk
+LEFT join jp2a_cdw.d_pset pt on pt.pset_sk=(case when prd.pset_sk is null then mt.pset_sk else prd.pset_sk end)  
+LEFT join jp_ops.m_pset_prd_grp g on pt.pset_id=g.pset_id AND g.subj_area_nm='call_detail'
+LEFT join jp2a_cdw.d_pset mp on mp.pset_id=g.prd_grp_id
+where  mt.src_dlt_flag = 0) 
+    )
+   WHERE ordr = 1
+   ) pds ON p.presn_id = pds.presn_id AND p.pset_sk = pds.d_pset_sk
+  LEFT OUTER JOIN ( SELECT prd_stgy_sk, prd_stgy_nm FROM jp2a_cdw.d_prd_stgy where src_dlt_flag = 0) ps ON pds.prd_stgy_sk = ps.prd_stgy_sk 
+  and  ps.prd_stgy_nm not  in ($prd_stgy_nm$)--'リアクティブ','RevMate教育','リモートディテール_メール','リモートディテール_郵送'
+  LEFT OUTER JOIN (	SELECT prd_tact_sk, prd_tact_nm FROM jp2a_cdw.d_prd_tact where src_dlt_flag = 0) pss ON pds.prd_tact_sk = pss.prd_tact_sk
+  WHERE p.cald_dt_sk >= (SELECT cast(to_char(add_months(cur_dt, - 5), 'YYYYMM') || '01' AS INTEGER) FROM jp_ops.cntl_refh) AND upper(p.sta_ds) = 'SUBMITTED_VOD'
+  )
+SELECT bp_par_sk, bp_sk, pset_sk, cald_dt_sk, 'DETAIL' AS chnl_type_id, presn_id, dtl_1, dtl_2, dtl_3
+FROM TAB
+
+UNION
+
+SELECT bp_par_sk, bp_sk, pset_sk, cald_dt_sk, 'APPOINTMENT DETAIL' AS chnl_type_id, presn_id, dtl_1, dtl_2, dtl_3
+FROM TAB
+WHERE apntt_ind = 1
+
+UNION
+
+SELECT bp_par_sk, bp_sk, pset_sk, cald_dt_sk, 'CO-VISITS WITH SUPERVISOR' AS chnl_type_id, presn_id, dtl_1, dtl_2, dtl_3
+FROM TAB
+WHERE coach_acct_vist_ind = 1 OR bus_acct_vist_ind = 1
+
+UNION
+
+SELECT bp_par_sk, bp_sk, pset_sk, cald_dt_sk, 'IVA' AS chnl_type_id, presn_id, dtl_1, dtl_2, dtl_3
+FROM TAB
+WHERE iva_flag = 1;
