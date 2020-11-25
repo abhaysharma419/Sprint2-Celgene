@@ -1,0 +1,103 @@
+CREATE TABLE jp_sandbox_ops.d_rpt_clear_ratio_dtl_1125
+(
+   sls_wrkr_sk           integer,
+   bp_par_sk             integer,
+   bp_sk                 integer,
+   pset_sk               integer,
+   cald_dt               integer,
+   actual_dtl_ct         integer,
+   capped_actual_dtl_ct  integer,
+   plan_dtl_ct           integer,
+   cler_rato_bckt        numeric(18,5)
+);
+
+CREATE TABLE jp_sandbox_ops.d_rpt_clear_ratio_sk_dtl_inter_1125
+(
+   sls_wrkr_sk           integer,
+   bp_par_sk             integer,
+   bp_sk                 integer,
+   pset_sk               integer,
+   sorg_unit_sk          integer,
+   sls_chnl_sk           integer,
+   dr_segn_sk            integer,
+   cald_dt               integer,
+   actual_dtl_ct         integer,
+   capped_actual_dtl_ct  integer,
+   plan_dtl_ct           integer,
+   cler_rato_bckt_sk     integer
+);
+
+CREATE TABLE jp_sandbox_ops.d_rpt_clear_ratio_sk_dtl_1125
+(
+   sls_wrkr_sk           integer,
+   bp_par_sk             integer,
+   bp_sk                 integer,
+   pset_sk               integer,
+   sorg_unit_sk          integer,
+   sls_chnl_sk           integer,
+   dr_segn_sk            integer,
+   cald_dt               integer,
+   actual_dtl_ct         integer,
+   capped_actual_dtl_ct  integer,
+   plan_dtl_ct           integer,
+   cler_rato_bckt_sk     integer
+);
+
+CREATE TABLE jp_sandbox_ops.rpt_sorg_prd_dtl_cler_rato_tdfa_temp_1125
+(
+   snp_id                  integer        NOT NULL,
+   sorg_unit_sk            integer,
+   prd_sk                  integer,
+   sls_chnl_sk             integer,
+   dr_seg_sk               integer,
+   cald_dt_sk              integer,
+   time_bckt_sk            integer,
+   cler_rato_bckt_sk       integer,
+   cler_rato_bckt_val_num  numeric(6,5),
+   cycl_time_id            integer,
+   scen_id                 integer,
+   inrt_by                 varchar(50),
+   inrt_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone,
+   modf_by                 varchar(50),
+   modf_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone
+);
+
+CREATE TABLE jp_sandbox_ops.rpt_sorg_prd_dtl_cler_rato_tdfa_inter_temp_1125
+(
+   snp_id                  integer        NOT NULL,
+   sorg_unit_sk            integer,
+   prd_sk                  integer,
+   sls_chnl_sk             integer,
+   dr_seg_sk               integer,
+   cald_dt_sk              integer,
+   time_bckt_sk            integer,
+   cler_rato_bckt_sk       integer,
+   cler_rato_bckt_val_num  numeric(6,5),
+   cycl_time_id            integer,
+   scen_id                 integer,
+   inrt_by                 varchar(50),
+   inrt_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone,
+   modf_by                 varchar(50),
+   modf_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone
+);
+
+
+
+CREATE TABLE jp_sandbox_ops.rpt_sorg_prd_dtl_cler_rato_tdfa_1125
+(
+   snp_id                  integer        NOT NULL,
+   sorg_unit_sk            integer,
+   prd_sk                  integer,
+   sls_chnl_sk             integer,
+   dr_seg_sk               integer,
+   cald_dt_sk              integer,
+   time_bckt_sk            integer,
+   cler_rato_bckt_sk       integer,
+   cler_rato_bckt_val_num  numeric(6,5),
+   cycl_time_id            integer,
+   scen_id                 integer,
+   inrt_by                 varchar(50),
+   inrt_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone,
+   modf_by                 varchar(50),
+   modf_dt                 timestamp      DEFAULT ('now'::character varying)::timestamp without time zone
+);

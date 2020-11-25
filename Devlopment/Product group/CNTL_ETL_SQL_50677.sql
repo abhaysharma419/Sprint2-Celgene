@@ -61,7 +61,7 @@ tgt.bp_sk,
 prd_grp.pset_sk,
 tgt.segn_sk,
 tgt.trgt_cd as src_trgt_type_cd,
-tgt. as src_trgt_type_ds,
+tgt.trgt_type_ds as src_trgt_type_ds,
 tgt.cycl_time_id,
 tgt.scen_id ,
 tgt.inrt_ts,
@@ -73,7 +73,7 @@ order by  prio.segn_prio ) as  rank
 
 FROM  jp3a_cdw.xref_bp_trgt tgt
 left outer join jp2a_Cdw.d_segn dsegn on dsegn.segn_sk = tgt.segn_sk
-left outer join  jp_ops.trgt_dr_seg_tier_prio_config prio on dsegn.segn_ds = prio.segn_ds and prio.subj_area_nm = 'insn_list'
+left outer join  jp_ops.trgt_dr_seg_tier_prio_config prio on dsegn.trgt_cd = prio.segn_ds and prio.subj_area_nm = 'insn_list'
 INNER JOIN jp_rpt_v.v_d_pset prd1 on tgt.pset_sk = prd1.pset_sk 
 LEFT OUTER JOIN jp_ops.m_pset_prd_grp map on map.pset_id = prd1.pset_id 
 LEFT OUTER JOIN jp_rpt_v.v_d_pset prd_grp on prd_grp.pset_id = map.prd_grp_id
