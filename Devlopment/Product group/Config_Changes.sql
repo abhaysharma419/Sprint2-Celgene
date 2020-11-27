@@ -1050,11 +1050,29 @@ WHERE rpt_tbl_nm = 'RPT_SORG_PRD_ATVY_FREQ_CHNL';
 INSERT INTO jp2_int.rpt_prd_rolup_aligt_temp (pset_sk,prd_brd_grp_sk) -----check this   ---not required 
 VALUES
   (1728,1728),
-  (1798,1798),
+  (1798,1798),--////
   (3080,3080),
   (3076,3076),
   (3078,3078);
   
+
+  ///
+(1798,1798)
+  2898,2898--OP CRC 
+
+  INSERT INTO jp_ops.rpt_prd_rolup_op_to_io
+(
+  pset_sk,
+  prd_brd_grp_sk
+)
+VALUES
+(
+  2898,
+  2898
+);
+
+
+
   
   
   ----------------------------11/17-----------------------------

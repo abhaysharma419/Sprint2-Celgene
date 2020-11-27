@@ -11,4 +11,11 @@ create table jp_sandbox_ops.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123
 as select * from jp_rpt_a.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
 
 create table jp_sandbox_ops.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1123 
-as select * from jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up
+as select * from jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+
+create table jp_sandbox_ops.s_insn_dr_prd_mth_pat_trk_1126
+as select * from jp3a_cdw.s_insn_dr_prd_mth_pat_trk 
+
+
+create table jp_sandbox_ops.s_insn_dr_prd_mth_pat_trk_1126_new
+as select * from jp3a_cdw.s_insn_dr_prd_mth_pat_trk 

@@ -1,0 +1,70 @@
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''EQ'',''OR'',''EM'',''IO LC'',''IO RCC'',''IO GC'',''IO CRC'',''IO EC'',''IO MELA'',''IO HN'',''OP RCC'',''YV'',''OPYV RCC'',''OP MELA'',''OPYV MELA'',''OP CRC'',''OPYV CRC'',''HEMA MM'',''HEMA ATL'',''HEMA CML'',''HEMA MDS'',''HEMA LYM'',''HEMA HL'',''IST'',''POM'',''REV MM'',''REV FL'',''OP LC'',''OPYV LC'',''OP Chemo LC'',''OPYV Chemo LC'''
+WHERE rpt_tbl_nm = 'S_SORG_SREP_BP_PRD_TIME_BCKT_PAT_TRK';
+
+
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''EQ'',''OR'',''EM'',''IO LC'',''OP LC'',''OPYV LC'',''OP Chemo LC'',''OPYV Chemo LC'',''IO RCC'',''IO GC'',''IO CRC'',''IO EC'',''IO MELA'',''IO HN'',''OP RCC'',''YV'',''OPYV RCC'',''OP MELA'',''OPYV MELA'',''REV MM''
+,''REV FL''
+,''POM''
+,''IST''
+,''LDX''
+,''OP CRC'',''OPYV CRC'',''HEMA MM'',''HEMA ATL'',''HEMA CML'',''HEMA MDS'',''HEMA LYM'',''HEMA HL''
+'
+WHERE rpt_tbl_nm = 'S_SORG_BP_PRD_TIME_BCKT_PAT_TRK';
+
+INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  ('OPYV LC','Co-Pro Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV LC','Co-Visit','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV LC','BMS Solo','BMS','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV LC','BMS Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','Co-Pro Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','Co-Visit','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','BMS Solo','BMS','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','BMS Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','Co-Pro Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','Co-Visit','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','BMS','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','Total','Target Type',320201126,1,getdate(),'bms_ops',getdate(),'bms_ops');
+
+  INSERT INTO jp2a_cdw.ref_attr (attr_id,attr_typ,attr_cd,attr_desc,attr_nm,prnt_attr_id,src_eff_dt,src_end_dt,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  (10160,'TREATMENT LINE','1L','1L','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10160,'TREATMENT LINE','1L','1L','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10162,'TREATMENT LINE','3L','3L','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10163,'TREATMENT LINE','4L+','4L+','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10164,'TREATMENT LINE','不明','不明','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10165,'TREATMENT LINE','未選択','未選択','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10166,'TREATMENT LINE','DUMMY','DUMMY','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10167,'TREATMENT LINE','NULL','NULL','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10168,'TREATMENT LINE','TOTAL','TOTAL','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10169,'TREATMENT LINE','背景不明','背景不明','OPYV LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10170,'TREATMENT LINE','1L','1L','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10171,'TREATMENT LINE','2L','2L','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10172,'TREATMENT LINE','3L','3L','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10173,'TREATMENT LINE','4L+','4L+','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10174,'TREATMENT LINE','不明','不明','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10175,'TREATMENT LINE','未選択','未選択','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10176,'TREATMENT LINE','DUMMY','DUMMY','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10177,'TREATMENT LINE','NULL','NULL','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10178,'TREATMENT LINE','TOTAL','TOTAL','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10179,'TREATMENT LINE','背景不明','背景不明','OP Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10180,'TREATMENT LINE','1L','1L','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10181,'TREATMENT LINE','2L','2L','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10182,'TREATMENT LINE','3L','3L','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10183,'TREATMENT LINE','4L+','4L+','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10184,'TREATMENT LINE','不明','不明','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10185,'TREATMENT LINE','未選択','未選択','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10186,'TREATMENT LINE','DUMMY','DUMMY','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10187,'TREATMENT LINE','NULL','NULL','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10188,'TREATMENT LINE','TOTAL','TOTAL','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops'),
+  (10189,'TREATMENT LINE','背景不明','背景不明','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops');
+
+
