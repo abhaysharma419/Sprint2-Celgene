@@ -1240,4 +1240,25 @@ VALUES
 );
 
 
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''JPINV00000000-RA+NON-BIOLOGICS-RA'',''JPINV00000000-NOAC+OAC_1-ALL'',''JPHEM00000000-MM TOTAL-ALL'',''JPHEM00000000-TKI TOTAL-ALL'',''JPHEM00000000-HL-ALL'',''JPONC00000000-CRC-ALL'',''JPONC00000000-EC-ALL'',''JPONC00000000-GC-ALL'',''JPONC00000000-H&N-ALL'',''JPONC00000000-LUNG (C-SCOR)-ALL'',''JPONC00000000-RCC-ALL'',''JPONC00000000-MELA OP-ALL'',''050-MELA OP-ALL'',''JPONC00000000-HBV MEDIUM MARKET-ALL'',''050-GC-ALL'',''050-CRC-ALL'',''050-EC-ALL'',''050-H&N-ALL'',''050-MELA YV-ALL'',''050-LUNG (C-SCOR)-ALL'',''050-RCC-ALL'',''JPHEM00000000-MM_POMALYST-ALL'',''JPHEM00000000-MM_REVLIMID-ALL'',''JPHEM00000000-MDS_REVLIMID-ALL'',''JPHEM00000000-ATLL_REVLIMID-ALL'',''JPHEM00000000-LYMPHOMA TOTAL-ALL'''
+WHERE rpt_tbl_nm = 'RPT_SORG_PRD_MKT_CLST_SLS_BU';
 
+Update jp2_int.d_rpt_prd_lrg_mkt set rpt_prd_disp_mkt=null where rpt_prd_disp_mkt='HEMA LYM';
+insert into jp2_int.d_rpt_prd_lrg_mkt values ('LYMPHOMA TOTAL','REV',null,'LYMPHOMA TOTAL',2201507,1,sysdate,'User',sysdate,'User','HEMA LYM');
+insert into  jp_ops.d_rpt_mkt_brd_seg values ('LYMPHOMA TOTAL','ALL','REVLIMID LYMPHOMA','2015314','C-SCOR');
+insert into jp_rpt_a.ref_rpt_mkt_trgt_type values ('LYMPHOMA TOTAL~ALL','TOTAL'),('LYMPHOMA TOTAL~ALL','BMS');
+
+delete from jp_ops.m_rpt_mkt_prd_grp where rpt_mkt_nm='LYMPHOMA_ISTODAX';
+update jp_ops.m_rpt_mkt_prd_grp  set rpt_mkt_nm='LYMPHOMA TOTAL' where rpt_mkt_nm='LYMPHOMA_REVLIMID';
+
+insert into jp_ops.ref_rpt_mkt_calc values ('LYMPHOMA TOTAL','Region','BMS','Y','Y'),('LYMPHOMA TOTAL','Territory','BMS','Y','Y'),('LYMPHOMA TOTAL','District','BMS','Y','Y'),
+('LYMPHOMA TOTAL','Region','Total','Y','Y'),('LYMPHOMA TOTAL','District','Total','Y','Y'),('LYMPHOMA TOTAL','Territory','Total','Y','Y');
+
+insert into jp_ops.ref_rpt_fil values ('RPT_SORG_PRD_MKT_CLST_SLS','MARKET','LYMPHOMA TOTAL~ALL'),('RPT_SORG_PRD_MKT_CLST_SLS','MARKET~TRGT_TYPE','LYMPHOMA TOTAL~ALL~BMKK SOLO'),('RPT_SORG_PRD_MKT_CLST_SLS','MARKET~TRGT_TYPE-360','LYMPHOMA TOTAL~ALL~TOTAL');
+
+insert into jp2_int.d_rpt_mkt_bmkk values ('LYMPHOMA TOTAL','ALL');
+
+
+delete from jp_ops.m_rpt_mkt_prd_grp_mr_flm where prd_grp_nm='HEMA LYM' and rpt_mkt_nm='LYMPHOMA_ISTODAX';
+Update jp_ops.m_rpt_mkt_prd_grp_mr_flm set rpt_mkt_nm='LYMPHOMA TOTAL' where prd_grp_nm='HEMA LYM' and rpt_mkt_nm='LYMPHOMA_REVLIMID';

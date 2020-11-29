@@ -1,0 +1,172 @@
+UPDATE apac_orch.cntl_etl_sql
+   SET sql_txt = 'Insert into jp2_int.F_BP_PRD_RX_FOL_UP_temp
+(
+BP_PRD_RX_ID
+,BP_PAR_SK
+,BP_SK
+,PSET_SK
+,FOL_UP_CALD_DT_SK
+,PAT_BRD_INATN_CALD_DT_SK
+,PLAN_DEVY_CALD_DT_SK
+,TRTT_STRT_CALD_DT_SK
+,CTRY_CD
+,DSRC_SK
+,CHLD_ACCT_ID
+,REC_TYPE_ID
+,FOLUP_NM
+,HCP_NM
+,INSN_NM
+,STG_OF_DIS_NM
+,RF_CD
+,ACPA_DSG_DS
+,BIO_MLCL_USE_DS
+,TRTT_LN_DS
+,CMBN_MEDC_TXT
+,CMPLCTNS_TXT
+,MSI_TEST_TIME_TXT
+,PAT_CASE_TRC_LINK_TXT
+,PAT_CASE_TRC_TXT
+,PAT_STA_CMPLCTN_TXT
+,PS_TXT
+,EFCT_1ST_LN_TXT
+,EFCT_2ND_LN_TXT
+,EFCT_3RD_LN_TXT
+,EFCT_4TH_LN_TXT
+,GNDR_TXT
+,PREV_DIS_TXT
+,PERD_1ST_LN_TXT
+,PERD_2ND_LN_TXT
+,PERD_3RD_LN_TXT
+,PERD_4TH_LN_TXT 
+,RX_LN_TXT
+,RX_PATH_TXT
+,REGM_1ST_LN_TXT
+,REGM_2ND_LN_TXT
+,REGM_3RD_LN_TXT
+,REGM_4TH_LN_TXT
+,SNTVY_POMALIDOMIDE_TXT
+,TRTT_HIST_POMALIDOMIDE_TXT
+,AGE_NUM
+,WT_NUM
+,DIS_DUR_CT
+,MTX_WKLY_RX_DOSE_CT
+,PAT_RX_STRT_DT
+,MTX_WKLY_RX_CMB_USE_IND
+,diags_ds
+,AMT_OF_DEVY_DSG_TXT
+,HIGH_RISK_CHROMOSOME_ABNORMALITY_TXT  
+,HCP_INTENTION_TXT			 
+,PAT_CNF_TXT				
+,TRTT_TERMN_REAS_DS			
+,SRC_MODF_TS
+,SRC_DLT_FLAG
+,CYCL_TIME_ID
+,SCEN_ID
+,INRT_TS
+,INRT_BY_NM
+,MODF_TS
+,MODF_BY_NM
+,SRC_CREA_DT_SK
+,LGCY_SRC_CREA_DT_SK
+,trtt_end_cald_dt_sk
+,trtt_expc_prd_txt
+,spctby_txt
+,rlps_type_txt
+,HSTGY_TXT
+,PD_L1_STA_TXT
+,PREV_TRTT_REGM_TXT
+,THER_AREA_TXT
+
+)
+SELECT
+stg.id as BP_PRD_RX_ID
+,Case when stg.Chld_Acct_BMS__c is null then null else coalesce(lkp1.bp_par_sk,-1) end as bp_par_sk
+,Case when stg.Chld_Acct_BMS__c is null then null else coalesce(lkp1.bp_sk,-1) end as bp_sk
+,Case when stg.prd_bms__c is null then null else coalesce(lkp2.pset_sk,-1) end as pset_sk
+,Case when stg.fol_up_dt_bms__C is null then null else coalesce(lkp3.cald_dt_sk,-1) end as FOL_UP_CALD_DT_SK
+,Case when stg.ABT_Dose_Dt_BMS__c is null then null else coalesce(lkp4.cald_dt_sk,-1) end as PAT_BRD_INATN_CALD_DT_SK
+,Case when stg.plan_devy_dt_bms__c is null then null else coalesce(lkp5.cald_dt_sk,-1) end as PLAN_DEVY_CALD_DT_SK
+,Case when stg.trtt_strt_dt_bms__C is null then null else coalesce(lkp6.cald_dt_sk,-1) end as TRTT_STRT_CALD_DT_SK
+,''JP''
+,coalesce(lkp7.DSRC_SK,-1) as DSRC_SK
+,stg.Chld_Acct_BMS__c
+,stg.Recordtypeid
+,stg.nm
+,stg.Chld_Acct_Nm_BMS__c
+,stg.Par_Acct_Nm_BMS__c
+,stg.Stg_Of_Dis_BMS__c
+,stg.RF_BMS__c
+,stg.ACPA_BMS__c
+,stg.Use_Bio_BMS__c
+,stg.Trtt_Ln_BMS__c
+,stg.cmbn_medc_bms__c
+,stg.complications_bms__c
+,stg.msi_test_timing__c as MSI_TEST_TIME_TXT
+,stg.MTX_CMB_Use_BMS__c
+,stg.Lgcy_Case_Trace_Num_BMS__c
+,stg.Complications_BMS__c
+,stg.PS_BMS__C
+,stg.Efct_1st_BMS__c
+,stg.Efct_2nd_BMS__c
+,stg.Efct_3rd_BMS__c
+,stg.Efct_4th_BMS__c
+,stg.Gndr_BMS__c
+,stg.Trtt_Expc_BMS__c
+,stg.Perd_1st_BMS__c
+,stg.Perd_2nd_BMS__c
+,stg.Perd_3rd_BMS__c
+,stg.Perd_4th_BMS__c
+,stg.RX_Ln_BMS__c
+,stg.RX_Path_BMS__c
+,stg.Regm_1st_BMS__c
+,stg.Regm_2nd_BMS__c
+,stg.Regm_3rd_BMS__c
+,stg.Regm_4th_BMS__c
+,stg.pomalidomide_susceptibility_bms__c
+,stg.pomalidomide_expc_bms__c
+,stg.Age_BMS__c
+,stg.wt_bms__c
+,stg.Dis_Dur_BMS__c
+,stg.MTX_Dose_BMS__c
+,stg.Trtt_Strt_Dt_BMS__c
+,stg.MTX_Cmb_Use_BMS__c
+,stg.diags_bms__c								AS diags_ds
+,stg.amt_of_devy_dsg_bms__c						AS amt_of_devy_dsg
+,stg.high_risk_chromosome_abnormality_bms__c    As HIGH_RISK_CHROMOSOME_ABNLT 
+,stg.hcp_intention_bms__c 						AS HCP_Intention
+,stg.pat_confirmation_bms__c					AS PAT_CNF				
+,stg.trtt_termn_reas_bms__c 					AS TRTT_TERMN_REAS		   
+,stg.lastmodifieddate 							AS src_modf_ts
+,Case when stg.isdeleted = ''true'' then 1 else 0 end as src_dlt_flag
+,stg.CYCL_TIME_ID
+,stg.SCEN_ID
+,getdate() as INRT_TS
+,stg.INRT_BY as INRT_BY_NM
+,getdate() as MODF_TS
+,''cdwjpetl02''  as MODF_BY_NM
+,Case when stg.createddate is null then null else coalesce(lkp8.cald_dt_sk,-1) end as SRC_CREA_DT_SK
+,tgt.LGCY_SRC_CREA_DT_SK as LGCY_SRC_CREA_DT_SK
+,Case when stg.trtt_end_dt_bms__C is null then null else coalesce(lkp9.cald_dt_sk,-1) end as TRTT_END_CALD_DT_SK
+,stg.TRTT_EXPC_PRD_BMS__c as trtt_expc_prd_txt
+,stg.susceptibility_BMS__c as spctby_txt
+,stg.relapse_Type_BMS__c as rlps_type_txt
+,stg.Histology_BMS__c as HSTGY_TXT
+,stg.PD_L1_Status_BMS__c AS PD_L1_STA_TXT
+,stg.Previous_Treatment_Regiment_BMS__c AS PREV_TRTT_REGM_TXT
+,stg.Therapeutic_Area_BMS__c AS THER_AREA_TXT
+
+From jp1a_stg.stg_veeva_pat_rx_fol_up_bms_jp__c stg
+left outer join jp2a_cdw.d_chld_acct lkp1 on stg.Chld_Acct_BMS__c = lkp1.CHLD_ACCT_CD
+inner join jp2a_cdw.f_bp_prd_rx_fol_up tgt on tgt.BP_PRD_RX_ID = stg.id
+left outer join (Select distinct nm, actv_flag , id from  jp1a_stg.stg_veeva_prd_vod__c where isdeleted = ''false'') stg1 on stg1.nm = stg.prd_bms__c and stg1.actv_flag = 1
+left outer join jp2a_cdw.xref_prd_item_extl_idnty lkp2 on lkp2.src_prd_id = stg1.id
+left outer join jp2a_cdw.d_cald_dt lkp3 on lkp3.cald_dt_id = TO_CHAR(stg.fol_up_dt_bms__c    ,''YYYYMMDD'')
+left outer join jp2a_cdw.d_cald_dt lkp4 on lkp4.cald_dt_id = TO_CHAR(stg.ABT_Dose_Dt_BMS__c  ,''YYYYMMDD'')
+left outer join jp2a_cdw.d_cald_dt lkp5 on lkp5.cald_dt_id = TO_CHAR(stg.plan_devy_dt_bms__c ,''YYYYMMDD'')
+left outer join jp2a_cdw.d_cald_dt lkp6 on lkp6.cald_dt_id = TO_CHAR(stg.trtt_strt_dt_bms__C ,''YYYYMMDD'')
+left outer join jp2a_cdw.d_cald_dt lkp8 on lkp8.cald_dt_id = TO_CHAR((convert_timezone(''GMT'',''JST'', stg.createddate)) ,''YYYYMMDD'')
+left outer join jp2a_cdw.d_cald_dt lkp9 on lkp9.cald_dt_id = TO_CHAR(stg.trtt_end_dt_bms__C ,''YYYYMMDD'')
+left outer join jp2a_cdw.D_DSRC LKP7  on upper(LKP7.DSRC_cd)=''INTERACT'' 
+where stg.cycl_time_id=$cycl_time_id$ and stg.scen_id=$scen_id$
+and stg.actv_flag = 1 ;'
+WHERE sql_id = 60272;
