@@ -181,8 +181,8 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.trtt_ln_txt= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1008,1009,1010,1011,1012) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.trtt_ln_txt,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1008,1009,1010,1011,1012,1153) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
@@ -270,8 +270,8 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.QSTN_TXT= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1014,1015,1016,1017) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1014,1015,1016,1017,1155) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 
@@ -342,8 +342,8 @@ union all
 Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.QSTN_TXT= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1018,1019,1020) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1018,1019,1020,1156) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 
@@ -558,8 +558,8 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id and  CF.QSTN_TXT= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1033,1034,1071,1073) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id and  nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1033,1034,1071,1073,1157) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 -------OP+YV MELA prescription followup ends --------------
 
@@ -615,8 +615,8 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.QSTN_TXT= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1038,1039,1040,1063) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1038,1039,1040,1063,1154) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
@@ -662,30 +662,31 @@ group by 1,2,3,4,5,6,7
 /* Product - REV MM ,POM,REV FL,IST,REV MDS,REV ATL  End */
 
 UNION ALL 
+/*potential patinet for OP*/
 
 Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
 cf.pat_type_ds,
-cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+cf.pat_type_lcl_lang_ds,  cf.trtt_ln_txt  as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
 from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
-Where serl_num IN (117,118,119,120,121,122,123) and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id and nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where serl_num between 1100 and 1152 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
 group by 1,2,3,4,5,6,7
 
 UNION ALL
 
 /* Product - OPYV LC, OP Chemo LC, OPYV Chemo LC  Start */
 
-Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,bpct.rx_ln_txt as trtt_ln_txt, 
+Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' as integer) as mth_cald_dt_sk, cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, 
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1075,1079,1082) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1178,1179,1180) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
 
-/* Product - OPYV LC, OP Chemo LC, OPYV Chemo LC  targeted patients */
+/*  targeted patients */
 Select   bp_par_sk, bp_sk, bs.pset_sk ,rx_mth_dt_sk,cf.pat_type_ds as pat_type_ds,cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt, sum(pat_num) as pat_ct from jp2a_Cdw.f_prd_dr_rx  bs 
 inner join jp2a_cdw.d_pset dp on bs.pset_sk=dp.pset_sk 
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id 
@@ -694,14 +695,14 @@ group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
 
-/* Product - OPYV LC, OP Chemo LC, OPYV Chemo LC  potential patients */
+/* potential patients */
 Select bp_par_sk, bp_sk,bpct.pset_sk, cast(LEFT(lgcy_src_crea_dt_sk,6)||'01' as integer) as mth_cald_dt_sk,
 cf.pat_type_ds,
-cf.pat_type_lcl_lang_ds,rx_ln_txt as trtt_ln_txt,count(bp_prd_rx_id) as pat_ct
+cf.pat_type_lcl_lang_ds,cf.trtt_ln_txt as trtt_ln_txt ,count(bp_prd_rx_id) as pat_ct
 from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id
-Where serl_num IN (1076,1080,1083) and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
+Where serl_num between 1160 and 1177 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
 group by 1,2,3,4,5,6,7
 
 /* Product -OPYV LC, OP Chemo LC, OPYV Chemo LC   End */

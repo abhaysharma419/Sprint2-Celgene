@@ -68,3 +68,8 @@ VALUES
   (10189,'TREATMENT LINE','背景不明','背景不明','OPYV Chemo LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops');
 
 
+--OP LC CHNAGE TO INCLUDE POTENTIAL PATIENT DATA---
+INSERT INTO jp2a_cdw.ref_attr (attr_id,attr_typ,attr_cd,attr_desc,attr_nm,prnt_attr_id,src_eff_dt,src_end_dt,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  (10190,'TREATMENT LINE','未選択','未選択','OP LC',NULL,NULL,NULL,320201127,1,TIMESTAMP '2020-11-27 00:00:00.000','bms_ops',TIMESTAMP '2020-11-27 00:00:00.000','bms_ops');
+
