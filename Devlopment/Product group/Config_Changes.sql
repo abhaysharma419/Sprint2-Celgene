@@ -700,10 +700,6 @@ VALUES
   ('HEMA CML','District','Total'),
   ('HEMA CML','Region','Total'),
   
-    ('HEMA LYM','Territory','Total'),
-  ('HEMA LYM','District','Total'),
-  ('HEMA LYM','Region','Total'),
-  
     ('HEMA MDS','Territory','Total'),
   ('HEMA MDS','District','Total'),
   ('HEMA MDS','Region','Total'),
