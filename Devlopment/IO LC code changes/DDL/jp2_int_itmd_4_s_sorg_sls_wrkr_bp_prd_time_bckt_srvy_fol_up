@@ -56,6 +56,7 @@ CREATE TABLE jp2_int.itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up
    hcp_intention_txt                     varchar(400),
    high_risk_chromosome_abnormality_txt  varchar(400),
    msi_test_time_txt                     varchar(255),
+   MSTC_site_txt                         varchar(255),
    mtx_wkly_rx_cmb_use_txt               varchar(400),
    pat_sta_cmplctn_txt                   varchar(400),
    pat_cnf_txt                           varchar(400),

@@ -54,6 +54,7 @@ F.SORG_UNIT_SK
 ,F.HCP_INTN_TXT		
 ,F.HIGH_RISK_CHRMSM_ABNRML_TXT
 ,F.msi_test_time_txt
+,F.MSTC_site_txt
 ,F.MTX_WKLY_RX_CMB_USE_TXT  		
 ,F.PAT_STA_CMPLCTN_TXT      		
 ,F.PAT_CNF_TXT 						

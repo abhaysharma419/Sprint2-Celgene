@@ -26,6 +26,7 @@ CREATE TABLE jp_rpt_a.f_bp_prd_rx_fol_up
    cmbn_medc_txt                         varchar(32768),
    cmplctns_txt                          varchar(255),
    msi_test_time_txt                     varchar(255),
+   MSTC_site_txt                         varchar(255),
    pat_case_trc_link_txt                 varchar(255),
    pat_case_trc_txt                      varchar(255),
    pat_sta_cmplctn_txt                   varchar(255),

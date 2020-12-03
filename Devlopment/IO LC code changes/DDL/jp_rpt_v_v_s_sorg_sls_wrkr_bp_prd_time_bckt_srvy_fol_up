@@ -53,6 +53,7 @@ CREATE OR REPLACE VIEW jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up
   hcp_intention_txt,
   high_risk_chromosome_abnormality_txt,
   msi_test_time_txt,
+  MSTC_site_txt, 
   mtx_wkly_rx_cmb_use_txt,
   pat_sta_cmplctn_txt,
   pat_cnf_txt,
@@ -119,7 +120,7 @@ AS
         CASE
             WHEN f.insn_trgt_type_nm IS NULL THEN '-'::character varying
             ELSE f.insn_trgt_type_nm
-        END AS insn_trgt_type_nm, f.dr_nm, f.stg_of_dis_nm, f.age_txt, f.amt_of_devy_dsg_txt, f.cmbn_medc_txt, f.cmplctns_txt, f.efct_1st_ln_txt, f.efct_2nd_ln_txt, f.efct_3rd_ln_txt, f.efct_4th_ln_txt, f.gndr_txt, f.hstgy_txt, f.pd_l1_sta_txt, f.hcp_intn_txt AS hcp_intention_txt, f.high_risk_chrmsm_abnrml_txt AS high_risk_chromosome_abnormality_txt, f.msi_test_time_txt, f.mtx_wkly_rx_cmb_use_txt, f.pat_sta_cmplctn_txt, f.pat_cnf_txt, f.perd_1st_ln_txt, f.perd_2nd_ln_txt, f.perd_3rd_ln_txt, f.perd_4th_ln_txt, f.prev_dis_txt, f.prev_trtt_regm_txt, f.ps_txt, f.regm_1st_ln_txt, f.regm_2nd_ln_txt, f.regm_3rd_ln_txt, f.regm_4th_ln_txt, f.rlps_type_txt, f.rx_ln_txt, f.spctby_txt, f.sntvy_pomalidomide_txt, f.ther_area_txt, f.trtt_expc_prd_txt, f.trtt_hist_pomalidomide_txt, f.trtt_ln_txt, f.acpa_dsg_ds, f.bio_mlcl_use_ds, f.diags_ds, f.trtt_termn_reas_ds, f.wt_num, f.dis_dur_ct, f.mtx_wkly_rx_dose_ct, 
+        END AS insn_trgt_type_nm, f.dr_nm, f.stg_of_dis_nm, f.age_txt, f.amt_of_devy_dsg_txt, f.cmbn_medc_txt, f.cmplctns_txt, f.efct_1st_ln_txt, f.efct_2nd_ln_txt, f.efct_3rd_ln_txt, f.efct_4th_ln_txt, f.gndr_txt, f.hstgy_txt, f.pd_l1_sta_txt, f.hcp_intn_txt AS hcp_intention_txt, f.high_risk_chrmsm_abnrml_txt AS high_risk_chromosome_abnormality_txt, f.msi_test_time_txt,f.MSTC_site_txt, f.mtx_wkly_rx_cmb_use_txt, f.pat_sta_cmplctn_txt, f.pat_cnf_txt, f.perd_1st_ln_txt, f.perd_2nd_ln_txt, f.perd_3rd_ln_txt, f.perd_4th_ln_txt, f.prev_dis_txt, f.prev_trtt_regm_txt, f.ps_txt, f.regm_1st_ln_txt, f.regm_2nd_ln_txt, f.regm_3rd_ln_txt, f.regm_4th_ln_txt, f.rlps_type_txt, f.rx_ln_txt, f.spctby_txt, f.sntvy_pomalidomide_txt, f.ther_area_txt, f.trtt_expc_prd_txt, f.trtt_hist_pomalidomide_txt, f.trtt_ln_txt, f.acpa_dsg_ds, f.bio_mlcl_use_ds, f.diags_ds, f.trtt_termn_reas_ds, f.wt_num, f.dis_dur_ct, f.mtx_wkly_rx_dose_ct, 
         CASE
             WHEN f.trgt_ind::character varying::text = 1::character varying::text THEN 'ターゲット医師'::character varying::character varying(400)
             ELSE 'ノンターゲット医師'::character varying::character varying(400)

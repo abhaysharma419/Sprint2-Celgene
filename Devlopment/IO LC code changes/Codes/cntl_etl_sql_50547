@@ -24,6 +24,7 @@ BP_PRD_RX_ID
 ,CMBN_MEDC_TXT
 ,CMPLCTNS_TXT
 ,MSI_TEST_TIME_TXT
+,mstc_site_txt
 ,PAT_CASE_TRC_LINK_TXT
 ,PAT_CASE_TRC_TXT
 ,PAT_STA_CMPLCTN_TXT
@@ -102,6 +103,7 @@ stg.id as BP_PRD_RX_ID
 ,stg.cmbn_medc_bms__c
 ,stg.complications_bms__c
 ,stg.msi_test_timing__c as MSI_TEST_TIME_TXT
+,stg.metastatic_site_bms__c
 ,stg.MTX_CMB_Use_BMS__c
 ,stg.Lgcy_Case_Trace_Num_BMS__c
 ,stg.Complications_BMS__c

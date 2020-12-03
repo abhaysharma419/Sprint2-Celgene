@@ -19,3 +19,11 @@ as select * from jp3a_cdw.s_insn_dr_prd_mth_pat_trk
 
 create table jp_sandbox_ops.s_insn_dr_prd_mth_pat_trk_1126_new
 as select * from jp3a_cdw.s_insn_dr_prd_mth_pat_trk 
+
+------////12/03--------------
+
+create table jp_sandbox_ops.f_bp_prd_rx_fol_up_1203 as select * from jp2a_cdw.f_bp_prd_rx_fol_up;
+create table jp_sandbox_ops.a_f_bp_prd_rx_fol_up_1203 as select * from jp_rpt_a.f_bp_prd_rx_fol_up;
+create table jp_sandbox_ops.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up_1203 
+as select * from jp3a_cdw.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up;
+create table jp_sandbox_ops.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up_1203 as select * from jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up
