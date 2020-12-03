@@ -31,3 +31,12 @@ VALUES
   (1098,'OPYV Chemo  LC','New Patients','新規患者数','背景不明',NULL,'不明',NULL,'2016231','2016231');
 
 
+----------///NEW PICK UP LIST (12/04)////--------------
+
+INSERT INTO jp_ops.m_pat_trk_cfgrn (serl_num,prd_shrt_ds,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,extl_id_vod__c,qstn_txt,ord_num,cpm_id,cpm_id_2) 
+VALUES
+  (1181,'OP MELA','New Patients','新規患者数','1st',NULL,'1L',NULL,'52324719','52324719'),
+
+
+
+
