@@ -365,6 +365,32 @@ UPDATE jp_rpt_a.ref_rpt_prd_icln
 WHERE rpt_tbl_nm = 'RPT_CLSTR_MKT_SLS_CSTAR_BU';
 
 
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA HL'
+WHERE mkt_nm = 'IO HL'
+AND   bu = 'JP HEMA Sales Business Unit';
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA ATL'
+WHERE mkt_nm = 'REVLIMID ATLL'
+AND   bu = 'JP HEMA Sales Business Unit';
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA LYM'
+WHERE mkt_nm = 'REVLIMID LYMPHOMA'
+AND   bu = 'JP HEMA Sales Business Unit';
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA MDS'
+WHERE mkt_nm = 'REVLIMID MDS'
+AND   bu = 'JP HEMA Sales Business Unit';
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA MM'
+WHERE mkt_nm = 'REVLIMID MM'
+AND   bu = 'JP HEMA Sales Business Unit';
+UPDATE jp_ops.mkt_clst_cstar_bu_mkt_map
+   SET mkt_nm = 'HEMA CML'
+WHERE mkt_nm = 'SPRYCEL'
+AND   bu = 'JP HEMA Sales Business Unit';
+
+
 
 
 
@@ -1247,3 +1273,9 @@ insert into jp2_int.d_rpt_mkt_bmkk values ('LYMPHOMA TOTAL','ALL');
 
 delete from jp_ops.m_rpt_mkt_prd_grp_mr_flm where prd_grp_nm='HEMA LYM' and rpt_mkt_nm='LYMPHOMA_ISTODAX';
 Update jp_ops.m_rpt_mkt_prd_grp_mr_flm set rpt_mkt_nm='LYMPHOMA TOTAL' where prd_grp_nm='HEMA LYM' and rpt_mkt_nm='LYMPHOMA_REVLIMID';
+
+
+-----DEFECT -06-----------///////////////////////
+
+select * from jp_ops.mkt_clst_cstar_bu_mkt_map --UPDATE IN THIS ..
+
