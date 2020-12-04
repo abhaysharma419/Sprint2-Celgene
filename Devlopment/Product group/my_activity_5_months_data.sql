@@ -213,13 +213,13 @@ WHERE 1 = (
  update jp_sandbox_ops.rpt_sorg_prd_dtl_cler_rato_tdfa_1125 set cycl_time_id=320201016 ,inrt_by='bms_ops' ,modf_by='bms_ops'
  ,snp_id =(select max(snp_id) from jp_rpt_a.rpt_sorg_prd_dtl_cler_rato_tdfa);
 
-delete  from jp_rpt_a.rpt_sorg_prd_dtl_cler_rato_tdfa where prd_sk  in (3431,3434,3430,3433,3435)
+delete  from jp_rpt_a.rpt_sorg_prd_dtl_cler_rato_tdfa where prd_sk  in (3431,3434,3430,3433,3435,3429)
  and  snp_id in (select max(snp_id) from jp_rpt_a.rpt_sorg_prd_dtl_cler_rato_tdfa) and time_bckt_sk<>301;
 
 
 --//CHNAGE CALD_DT SK BETWEEN >> 202007 AND 202011
 insert into jp_rpt_a.rpt_sorg_prd_dtl_cler_rato_tdfa 
 select a.* from jp_sandbox_ops.rpt_sorg_prd_dtl_cler_rato_tdfa_1125
- a join jp2a_cdw.d_pset p on p.pset_sk=a.prd_sk where prd_shrt_ds in ('HEMA MM','HEM LYM','HEMA CML','HEMA HL','HEMA ATL','HEMA MDS')
+ a join jp2a_cdw.d_pset p on p.pset_sk=a.prd_sk where prd_shrt_ds in ('HEMA MM','HEMA LYM','HEMA CML','HEMA HL','HEMA ATL','HEMA MDS')
  and cald_dt_sk between 20200501 and 20200901;
 

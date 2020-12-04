@@ -362,8 +362,7 @@ ENCLUSTER
 -------
 UPDATE jp_rpt_a.ref_rpt_prd_icln
    SET prd_list = '''BARACLUDE-JPONC00000000'',''DAKLINZA / SUNVEPRA-JPONC00000000'',''HEMA CML-JPHEM00000000'',''XIMENCY-JPONC00000000'',''ELIQUIS-JPINV00000000'',''ORENCIA-JPINV00000000'',''IO LUNG-JPONC00000000'',''IORCC-JPONC00000000'',''IO HN-JPONC00000000'',''IO MELANOMA-JPONC00000000'',''IO CRC-JPONC00000000'',''IO EC-JPONC00000000'',''IO GC-JPONC00000000'',''HEMA MM-JPHEM00000000'',''HEMA LYM-JPHEM00000000'',''HEMA MDS-JPHEM00000000'',''HEMA ATL-JPHEM00000000'',''HEMA HL-JPHEM00000000'' '
-WHERE rpt_tbl_nm = 'RPT_CLSTR_MKT_SLS_CSTAR_BU'
-AND   prd_list = '''BARACLUDE-JPONC00000000'',''DAKLINZA / SUNVEPRA-JPONC00000000'',''HEMA CML-JPHEM00000000'',''XIMENCY-JPONC00000000'',''ELIQUIS-JPINV00000000'',''ORENCIA-JPINV00000000'',''IO LUNG-JPONC00000000'',''IORCC-JPONC00000000'',''IO HN-JPONC00000000'',''IO MELANOMA-JPONC00000000'',''IO CRC-JPONC00000000'',''IO EC-JPONC00000000'',''IO GC-JPONC00000000'',''HEMA MM-JPHEM00000000'',''HEMA LYM-JPHEM00000000'',''HEMA MDS-JPHEM00000000'',''HEMA ATL-JPHEM00000000'',''HEMA HL-JPHEM00000000''';
+WHERE rpt_tbl_nm = 'RPT_CLSTR_MKT_SLS_CSTAR_BU';
 
 
 
@@ -536,12 +535,7 @@ VALUES
   ('REV ATL','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
   ('REV ATL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
   ('REV ATL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
-  
-  INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
-VALUES
-  ('HEMA MM','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
-  ('HEMA MM','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
-  ('HEMA MM','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
+
 
 
 INSERT INTO jp2a_cdw.ref_attr (attr_id,attr_typ,attr_cd,attr_desc,attr_nm,prnt_attr_id,src_eff_dt,src_end_dt,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
@@ -737,12 +731,7 @@ VALUES
   ('HEMA HL','Region','Total','N','N','Y'),
   ('HEMA HL','Team','Total','N','N','Y'),
   ('HEMA HL','Territory','Total','N','N','Y'),
-  
-   ('HEMA MDS','District','Total','N','N','Y'),
-  ('HEMA MDS','Region','Total','N','N','Y'),
-  ('HEMA MDS','Team','Total','N','N','Y'),
-  ('HEMA MDS','Territory','Total','N','N','Y'),
-  
+    
      ('HEMA LYM','District','Total','N','N','Y'),
   ('HEMA LYM','Region','Total','N','N','Y'),
   ('HEMA LYM','Team','Total','N','N','Y'),
