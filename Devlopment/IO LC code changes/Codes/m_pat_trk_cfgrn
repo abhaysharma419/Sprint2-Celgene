@@ -33,9 +33,36 @@ VALUES
 
 ----------///NEW PICK UP LIST (12/04)////--------------
 
-INSERT INTO jp_ops.m_pat_trk_cfgrn (serl_num,prd_shrt_ds,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,extl_id_vod__c,qstn_txt,ord_num,cpm_id,cpm_id_2) 
+INSERT INTO jp_ops.m_pat_trk_cfgrn (serl_num,prd_shrt_ds,pat_type_ds,pat_type_lcl_lang_ds,trtt_ln_txt,extl_id_vod__c,qstn_txt,ord_num,cpm_id,cpm_id_2)
 VALUES
-  (1181,'OP MELA','New Patients','新規患者数','1st',NULL,'1L',NULL,'52324719','52324719'),
+(1181,'OP MELA','New Patients','新規患者数','1st',NULL,'1L',NULL,'52324719','52324719'),
+(1182,'OP MELA','New Patients','新規患者数','2nd',NULL,'2L',NULL,'52324719','52324719'),
+(1183,'OP MELA','New Patients','新規患者数','Adjuvant',NULL,'Adjuvant',NULL,'52324719','52324719'),
+(1184,'OP MELA','New Patients','新規患者数','Other',NULL,'3L+',NULL,'52324719','52324719'),
+
+(1186,'OP RCC','New Patients','新規患者数','2nd',NULL,'2L',NULL,'52324723','52324723'),
+(1187,'OP RCC','New Patients','新規患者数','3rd 以降',NULL,'3L+',NULL,'52324723','52324723'),
+
+(1189,'OPYV MELA','New Patients','新規患者数','1st',NULL,'1L',NULL,'2011827','2011827'),
+(1190,'OPYV MELA','New Patients','新規患者数','2nd',NULL,'2L',NULL,'2011827','2011827'),
+(1191,'OPYV MELA','New Patients','新規患者数','Other',NULL,'3L+',NULL,'2011827','2011827'),
+
+(1193,'OPYV RCC','New Patients','新規患者数','1st',NULL,'1L',NULL,'2012012','2012012'),
+(1194,'YV','New Patients','新規患者数','TOTAL',NULL,'YV',NULL,'2000181','2000181'),
+(1194,'OP MELA','Potential Patients','候補症例数','1st',NULL,'1L',NULL,'52324719','52324719'),
+(1195,'OP MELA','Potential Patients','候補症例数','2nd',NULL,'2L',NULL,'52324719','52324719'),
+(1196,'OP MELA','Potential Patients','候補症例数','Adjuvant',NULL,'Adjuvant',NULL,'52324719','52324719'),
+(1197,'OP MELA','Potential Patients','候補症例数','Other',NULL,'3L+',NULL,'52324719','52324719'),
+
+(1199,'OP RCC','Potential Patients','候補症例数','2nd',NULL,'2L',NULL,'52324723','52324723'),
+(1200,'OP RCC','Potential Patients','候補症例数','3rd 以降',NULL,'3L+',NULL,'52324723','52324723'),
+
+(1202,'OPYV MELA','Potential Patients','候補症例数','1st',NULL,'1L',NULL,'2011827','2011827'),
+(1203,'OPYV MELA','Potential Patients','候補症例数','2nd',NULL,'2L',NULL,'2011827','2011827'),
+(1204,'OPYV MELA','Potential Patients','候補症例数','Other',NULL,'3L+',NULL,'2011827','2011827'),
+
+(1206,'OPYV RCC','Potential Patients','候補症例数','1st',NULL,'1L',NULL,'2012012','2012012'),
+(1207,'YV','Potential Patients','候補症例数','TOTAL',NULL,'YV',NULL,'2000181','2000181');
 
 
 
