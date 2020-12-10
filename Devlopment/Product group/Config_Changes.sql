@@ -526,11 +526,6 @@ VALUES
   ('HEMA ATL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
   ('HEMA ATL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
 
-INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
-VALUES
-  ('HEMA HL','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
-  ('HEMA HL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
-  ('HEMA HL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
 
 INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
 VALUES
@@ -562,7 +557,7 @@ VALUES
   ('REV ATL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
   ('REV ATL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
 
-
+UPDATE jp_ops.m_prd_trgt_pat_trk SET prd_shrt_ds='HEMA HL' WHERE prd_shrt_ds='IO HL';
 
 INSERT INTO jp2a_cdw.ref_attr (attr_id,attr_typ,attr_cd,attr_desc,attr_nm,prnt_attr_id,src_eff_dt,src_end_dt,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
 VALUES

@@ -84,4 +84,10 @@ VALUES
   (10196,'TREATMENT LINE','DUMMY','DUMMY','IO LC',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
   (10197,'TREATMENT LINE','NULL','NULL','IO LC',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops');
 
+---'-' VALUES FOR Chemo PRODUCTS-----------------
 
+INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  ('OPYV LC','-','Total','Target Type',320201210,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OP Chemo LC','-','Total','Target Type',320201210,1,getdate(),'bms_ops',getdate(),'bms_ops'),
+  ('OPYV Chemo LC','-','Total','Target Type',320201210,1,getdate(),'bms_ops',getdate(),'bms_ops');
