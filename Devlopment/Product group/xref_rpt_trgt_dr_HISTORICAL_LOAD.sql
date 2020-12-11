@@ -110,3 +110,82 @@ delete from jp_sandbox_ops.xref_rpt_trgt_dr_rev_mm_lym where pset_sk in (1728,30
 insert into jp2a_cdw.xref_rpt_trgt_dr
 
 select * from   jp_sandbox_ops.xref_rpt_trgt_dr_rev_mm_lym 
+
+
+
+---------UPDATES AFTER DEFECT 042 AND 043 --------------------------
+--create a config table  to include history hema ------------
+select * into jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist from jp_ops.trgt_dr_seg_tier_prio_config ;
+update jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist set subj_area_nm='doctor_segment_hist' where subj_area_nm='doctor_segment';
+
+
+UPDATE jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist  SET segn_ds = '26' WHERE segn_id = 4 AND   subj_area_nm = 'doctor_segment_hist';
+UPDATE jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist  SET segn_ds = '13' WHERE segn_id = 5 AND   subj_area_nm = 'doctor_segment_hist';
+UPDATE jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist  SET segn_ds = '39' WHERE segn_id = 6 AND   subj_area_nm = 'doctor_segment_hist';
+UPDATE jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist  SET segn_ds = '2'  WHERE segn_id = 7 AND   subj_area_nm = 'doctor_segment_hist';
+UPDATE jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist  SET segn_ds = '47' WHERE segn_id = 8 AND   subj_area_nm = 'doctor_segment_hist';
+
+create table    jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_mm as
+select * from (
+select sorg_sk,pset_sk,sls_wrkr_sk,strt_cald_dt_sk,bp_sk,bp_par_sk,dr_seg_sk,plan_dtl_ct,segn_sk, dsegn.cycl_time_id, dsegn.scen_id, dsegn.inrt_dt, dsegn.inrt_by, 
+dsegn.modf_dt, dsegn.modf_by ,rank() over (partition by bp_par_sk,bp_sk,pset_sk 
+order by prio.segn_prio ) as  rank  from 
+(
+Select sorg_sk, case when prd_grp.pset_sk is null then s.pset_sk else prd_grp.pset_sk end as pset_sk, s.sls_wrkr_sk, s.strt_cald_dt_sk, 
+s.bp_sk, s.bp_par_sk, seg.segn_sk as dr_seg_sk, max(plan_dtl_ct) as plan_dtl_ct , s.segn_sk, s.cycl_time_id, s.scen_id, s.inrt_dt, s.inrt_by, 
+s.modf_dt, s.modf_by 
+from jp2a_cdw.xref_rpt_trgt_dr s 
+LEFT JOIN jp_rpt_v.v_d_pset prd1 
+on s.pset_sk = prd1.pset_sk 
+left join jp_ops.m_pset_prd_grp map 
+on map.pset_id = prd1.pset_id 
+left join jp_rpt_v.v_d_pset prd_grp 
+on prd_grp.pset_id = map.prd_grp_id 
+left outer join jp3a_cdw.dg_insn_bp_prd_seg seg 
+on seg.bp_sk=s.bp_sk 
+and seg.par_bp_sk=s.bp_par_sk 
+and seg.pset_sk=prd_grp.pset_sk 
+where map.subj_area_nm='target_doctor' and s.pset_sk in (1728,3080,1798) AND   S.strt_cald_dt_sk>=20200701
+group by 1,2,3,4,5,6,7,9,10,11,12,13,14,15) dsegn
+left outer join  jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist prio on dsegn.SEGN_SK::INT = prio.segn_ds::INT and prio.subj_area_nm = 'doctor_segment')
+ WHERE   rank=1 ;
+
+
+
+create table    jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_lym as
+select * from (
+select sorg_sk,pset_sk,sls_wrkr_sk,strt_cald_dt_sk,bp_sk,bp_par_sk,dr_seg_sk,plan_dtl_ct,segn_sk, dsegn.cycl_time_id, dsegn.scen_id, dsegn.inrt_dt, dsegn.inrt_by, 
+dsegn.modf_dt, dsegn.modf_by ,rank() over (partition by bp_par_sk,bp_sk,pset_sk 
+order by prio.segn_prio ) as  rank  from 
+(
+Select sorg_sk, case when prd_grp.pset_sk is null then s.pset_sk else prd_grp.pset_sk end as pset_sk, s.sls_wrkr_sk, s.strt_cald_dt_sk, 
+s.bp_sk, s.bp_par_sk, seg.segn_sk as dr_seg_sk, max(plan_dtl_ct) as plan_dtl_ct , s.segn_sk, s.cycl_time_id, s.scen_id, s.inrt_dt, s.inrt_by, 
+s.modf_dt, s.modf_by 
+from jp2a_cdw.xref_rpt_trgt_dr s 
+LEFT JOIN jp_rpt_v.v_d_pset prd1 
+on s.pset_sk = prd1.pset_sk 
+left join jp_ops.m_pset_prd_grp map 
+on map.pset_id = prd1.pset_id 
+left join jp_rpt_v.v_d_pset prd_grp 
+on prd_grp.pset_id = map.prd_grp_id 
+left outer join jp3a_cdw.dg_insn_bp_prd_seg seg 
+on seg.bp_sk=s.bp_sk 
+and seg.par_bp_sk=s.bp_par_sk 
+and seg.pset_sk=prd_grp.pset_sk 
+where map.subj_area_nm='target_doctor' and s.pset_sk in (3076,3078) AND   S.strt_cald_dt_sk>=20200701
+group by 1,2,3,4,5,6,7,9,10,11,12,13,14,15) dsegn
+left outer join  jp_sandbox_ops.trgt_dr_seg_tier_prio_config_hist prio on dsegn.SEGN_SK::INT = prio.segn_ds::INT and prio.subj_area_nm = 'doctor_segment')
+ WHERE   rank=1 ;
+
+delete from jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_lym where pset_sk in (3076,3078);
+delete from jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_mm where pset_sk in (1728,3080,1798);
+
+ delete from jp2a_cdw.xref_rpt_trgt_dr where pset_sk in (3431,3429) AND strt_cald_dt_sk BETWEEN 20200701 AND 20200901; -- REPLACE WIITH CURRENT -1 MONTH 
+alter table jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_lym drop column rank;
+alter table jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_mm drop column rank;
+ INSERT INTO JP2A_CDW.XREF_RPT_TRGT_DR SELECT * FROM jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_lym WHERE strt_cald_dt_sk NOT IN (20201001);--- REPLACE WITH CURRENT MONTH
+ INSERT INTO JP2A_CDW.XREF_RPT_TRGT_DR SELECT * from  jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_MM WHERE strt_cald_dt_sk NOT IN (20201001);-- REPLACE WITH CURRENT MONTH
+
+
+
+
