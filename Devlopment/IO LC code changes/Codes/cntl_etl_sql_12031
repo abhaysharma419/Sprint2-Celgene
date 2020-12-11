@@ -181,8 +181,8 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
-inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.trtt_ln_txt,'a')= nvl(bpct.rx_ln_txt,'a')
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1008,1009,1010,1011,1012,1153) and bpct.src_dlt_flag=0
+inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.qstn_txt,'a')= nvl(bpct.rx_ln_txt,'a')
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1008,1009,1010,1011,1012,1153,1181,1182,1183,1184) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
@@ -343,7 +343,7 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1018,1019,1020,1156) and bpct.src_dlt_flag=0
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1018,1019,1020,1156,1186,1187) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 
@@ -465,7 +465,7 @@ Select bp_par_sk, bp_sk, dp.pset_sk ,  cast(left(TRTT_STRT_CALD_DT_SK,6)||'01' a
 count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct  
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND CF.QSTN_TXT= bpct.rx_ln_txt
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1028) and bpct.src_dlt_flag=0
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1028, 1194) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 ---------Yervoy prescription followup data--------------
@@ -559,7 +559,7 @@ count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id and  nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1033,1034,1071,1073,1157) and bpct.src_dlt_flag=0
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1033,1034,1071,1073,1157,1189,1190,1191) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 -------OP+YV MELA prescription followup ends --------------
 
@@ -616,7 +616,7 @@ count(bp_prd_rx_id) as pat_ct from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk
 --left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on bpct.pset_sk=rlup.prd_brd_grp_sk 	
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id AND nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
-Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1038,1039,1040,1063,1154) and bpct.src_dlt_flag=0
+Where TRTT_STRT_CALD_DT_SK <>-1 and serl_num in (1038,1039,1040,1063,1154,1193) and bpct.src_dlt_flag=0
 group by 1, 2, 3,4,5, 6,7
 
 UNION ALL
@@ -670,7 +670,7 @@ cf.pat_type_lcl_lang_ds,  cf.trtt_ln_txt  as trtt_ln_txt,count(bp_prd_rx_id) as 
 from jp2a_cdw.F_BP_PRD_RX_FOL_UP bpct
 inner join jp2a_cdw.d_pset dp on dp.pset_sk=bpct.pset_sk 
 inner join jp_ops.m_pat_trk_cfgrn cf on cf.cpm_id=dp.pset_id and nvl(CF.QSTN_TXT,'a')= nvl(bpct.rx_ln_txt,'a')
-Where serl_num between 1100 and 1152 and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
+Where (serl_num between 1100 and 1152 OR serl_num between 1195 and 1207) and TRTT_STRT_CALD_DT_SK is null and TRTT_END_CALD_DT_SK is null and bpct.src_dlt_flag=0
 group by 1,2,3,4,5,6,7
 
 UNION ALL
