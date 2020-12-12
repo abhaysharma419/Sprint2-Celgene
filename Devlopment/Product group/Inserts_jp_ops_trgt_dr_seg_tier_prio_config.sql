@@ -28,3 +28,7 @@ VALUES
   (26,'tier','HP_100',99,DATE '2020-11-03','bms_ops'),
   (27,'tier','HP_200',99,DATE '2020-11-03','bms_ops'),
   (28,'tier','GP_99',99,DATE '2020-11-03','bms_ops');
+
+
+  insert into jp_ops.trgt_dr_seg_tier_prio_config 
+select 9999, 'doctor_segment', 'NONE', 99999, '2020-11-03 00:00:00','bms_ops';

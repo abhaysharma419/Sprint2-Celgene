@@ -1,0 +1,98 @@
+create table jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_1212_rpt as select * from jp_rpt_a.dg_insn_bp_prd_mth_trgt;
+create table jp_sandbox_ops.v_dg_insn_bp_prd_mth_trgt_ns_1212 as select * from jp_rpt_v.v_dg_insn_bp_prd_mth_trgt;
+create table jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_1212 as select * from jp3a_cdw.dg_insn_bp_prd_mth_trgt;
+
+
+
+-- SP to HEMA CML
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, 3434 as pset_sk, mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from  jp3a_cdw.dg_insn_bp_prd_mth_trgt 
+where pset_sk = 804 and mth_cald_dt_sk NOT IN (select max(mth_cald_dt_sk) from jp3a_cdw.dg_insn_bp_prd_mth_trgt);
+
+
+-- EM to HEMA MM before 202007
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, 3431 as pset_sk, mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from  jp3a_cdw.dg_insn_bp_prd_mth_trgt 
+where pset_sk = 1798 and mth_cald_dt_sk < 20200701;
+
+
+--IO HL TO HEMA HL
+update  jp3a_cdw.dg_insn_bp_prd_mth_trgt set pset_sk = 3433
+where pset_sk = 2696 and mth_cald_dt_sk NOT IN (select max(mth_cald_dt_sk) from jp3a_cdw.dg_insn_bp_prd_mth_trgt);
+
+
+
+-- target data for HEMA LYM and HEMA MM from 202007 till current minus one month
+
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk,coalesce(pset_sk, -1) as pset_Sk, strt_cald_dt_sk,
+case when max(mr_rep_dr_trgt_flg) is null then 'NULL' else max(mr_rep_dr_trgt_flg) end  as mr_rep_dr_trgt_flg,
+case when max(dr_agrd_trgt_flg) is null then 'NULL' else max(dr_agrd_trgt_flg) end  as dr_agrd_trgt_flg,
+case when max(dr_curr_seg_nm) is null then 'NULL' else max(dr_curr_seg_nm) end  as dr_curr_seg_nm,
+320201213 as cycl_time_id, 1 as scen_id, getdate() inrt_ts, 'bms_ops' as inrt_by_nm, getdate() modf_ts, 'bms_ops' as  modf_by_nm
+from (
+SELECT a.bp_par_sk, a.bp_sk, 
+	CASE WHEN a.bp_par_sk = -1 THEN 'Non Target'::character varying
+        ELSE 'Target'::character varying
+    END AS mr_rep_dr_trgt_flg, 
+NULL as dr_agrd_trgt_flg, a.pset_sk, b.segn_cd as dr_curr_seg_nm, a.strt_cald_dt_sk
+FROM 
+jp2a_cdw.xref_rpt_trgt_dr a 
+LEFT JOIN (select segn_sk, segn_cd, segn_ds from jp2a_cdw.d_segn where segn_type_ds = 'Doctor Rating' ) b on a.dr_seg_sk=b.segn_sk
+where a.strt_cald_dt_sk >= 20200701 and a.strt_cald_dt_sk < (SELECT max_strt_dt_cald_sk	FROM jp_ops.cntl_refh_max_cycl_plan) and a.pset_sk IN (3431,3429)
+     )  group by 1,2,3,4;
+	 
+	 
+
+-- non target data for HEMA MM
+
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, pset_Sk , mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from 
+(select a.*,rank() over (partition by bp_par_sk,bp_sk,pset_sk order by prio.segn_prio ) as  rank from
+(
+select distinct bp_par_sk, bp_sk, case when dp2.pset_sk is null then x.pset_sk else dp2.pset_sk end as pset_Sk , mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, x.cycl_time_id, x.scen_id, x.inrt_ts, x.inrt_by_nm, x.modf_ts, x.modf_by_nm 
+from  jp3a_cdw.dg_insn_bp_prd_mth_trgt x
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on x.pset_sk=rlup.prd_brd_grp_sk
+left outer join jp2a_cdw.d_pset dp  on (case when rlup.pset_sk is null then x.pset_sk else rlup.pset_sk end )=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where pg.subj_area_nm in ('doctor_segment') and x.pset_sk IN (1728,1798,3080) and x.mth_cald_dt_sk >= 20200701 and x.mth_cald_dt_sk < (SELECT max_strt_dt_cald_sk FROM jp_ops.cntl_refh_max_cycl_plan) 
+and mr_rep_dr_trgt_ds = 'NULL' and dr_agrd_trgt_ds = 'NULL'
+)a
+left outer join  jp_ops.trgt_dr_seg_tier_prio_config prio on  prio.segn_ds  = (case when a.dr_curr_seg_nm = 'NULL' THEN 'NONE' ELSE a.dr_curr_seg_nm end ) and prio.subj_area_nm = 'doctor_segment'
+)where rank = 1 and pset_sk IN (3431);
+
+-- non target data for HEMA LYM
+
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, pset_Sk , mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from 
+(select a.*,rank() over (partition by bp_par_sk,bp_sk,pset_sk order by prio.segn_prio ) as  rank from
+(
+select distinct bp_par_sk, bp_sk, case when dp2.pset_sk is null then x.pset_sk else dp2.pset_sk end as pset_Sk , mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, x.cycl_time_id, x.scen_id, x.inrt_ts, x.inrt_by_nm, x.modf_ts, x.modf_by_nm 
+from  jp3a_cdw.dg_insn_bp_prd_mth_trgt x
+left outer join jp2_int.rpt_prd_rolup_atvy_temp rlup on x.pset_sk=rlup.prd_brd_grp_sk
+left outer join jp2a_cdw.d_pset dp  on (case when rlup.pset_sk is null then x.pset_sk else rlup.pset_sk end )=dp.pset_sk 
+left outer join jp_ops.m_pset_prd_grp  pg on dp.pset_id=pg.pset_id 
+left outer join jp2a_cdw.d_pset dp2  on pg.prd_grp_id=dp2.pset_id 
+where pg.subj_area_nm in ('doctor_segment') and x.pset_sk IN (3076,3078) and x.mth_cald_dt_sk >= 20200701 and x.mth_cald_dt_sk < (SELECT max_strt_dt_cald_sk FROM jp_ops.cntl_refh_max_cycl_plan) 
+and mr_rep_dr_trgt_ds = 'NULL' and dr_agrd_trgt_ds = 'NULL'
+)a
+left outer join  jp_ops.trgt_dr_seg_tier_prio_config prio on  prio.segn_ds  = (case when a.dr_curr_seg_nm = 'NULL' THEN 'NONE' ELSE a.dr_curr_seg_nm end ) and prio.subj_area_nm = 'doctor_segment'
+)where rank = 1 and pset_sk IN (3429);
+
+
+insert into jp3a_cdw.dg_insn_bp_prd_mth_trgt
+select * from jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212;
+
+
+insert into jp_rpt_a.dg_insn_bp_prd_mth_trgt
+select *, (select coalesce(max(snp_id),0)+1 snp_id from jp_ops.cntl_rpt_snp where tbl_nm='dg_insn_bp_prd_mth_trgt' and actv_flag=1) as snp_id
+from jp3a_cdw.dg_insn_bp_prd_mth_trgt ;
+
+
+INSERT INTO jp_ops.cntl_rpt_snp (snp_id,tbl_nm,actv_flag,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by,cmt,purg_flag,s3_unload_path)
+VALUES
+(55,'dg_insn_bp_prd_mth_trgt',1,320201016,1,TIMESTAMP '2020-11-20 12:59:33.000','cdwjpetl01',TIMESTAMP '2020-11-20 12:59:33.000','cdwjpetl01','',NULL,NULL);
+
+
+
