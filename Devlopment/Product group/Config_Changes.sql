@@ -1286,11 +1286,7 @@ WHERE rpt_tbl_nm = 'RPT_INSN_DR_PRD_MTH_TRGT_PAT';
 
 ------DEFECT 40------------
 
-DELETE
-FROM jp_ops.m_folup_cfgrn
-WHERE serl_num = 5
-AND   prd_shrt_ds = 'OP HN'
-AND   qstn_txt = '背景不明 '
-AND   ord_num = 4;
+DELETE FROM jp_ops.m_folup_cfgrn WHERE serl_num = 5 AND   prd_shrt_ds = 'OP HN'AND   qstn_txt = '背景不明 'AND   ord_num = 4;
 
+Also an update in sql_id 70019 to fix the random behaviour.
 
