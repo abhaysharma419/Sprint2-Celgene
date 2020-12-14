@@ -36,7 +36,9 @@ aligt.dst_lcl_nm				AS dst_lcl_nm,
 aligt.terr_lcl_nm				AS terr_lcl_nm, 
 SMRY.qstn_txt					AS qstn_txt,
 /*Fix applied in order number to fix the random behviour at frontend level. Observed during Integartion Batch -2 UAT --2020-12-14*/
-case when smry.pset_sk=796 and smry.ord_num=5 then 10 else SMRY.ord_num end 	AS ord_num,
+case when smry.pset_sk=796 and smry.ord_num=5 then 10
+     when smry.pset_sk=2738 and smry.qstn_txt='背景不明'  and smry.ord_num=4 then 10 
+else SMRY.ord_num end 	AS ord_num,
 SMRY.mtrc_nm					AS mtrc_nm,
 SMRY.mtrc_lcl_lang_nm			AS mtrc_lcl_lang_nm,
 SMRY.last_modf_ts				AS last_modf_ts,
