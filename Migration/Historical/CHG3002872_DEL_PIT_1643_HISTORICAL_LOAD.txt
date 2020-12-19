@@ -8,16 +8,24 @@ query_email_flag = false
 
 [query_details]
 
-create table jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_1212_rpt as select * from jp_rpt_a.dg_insn_bp_prd_mth_trgt;
-create table jp_sandbox_ops.v_dg_insn_bp_prd_mth_trgt_ns_1212 as select * from jp_rpt_v.v_dg_insn_bp_prd_mth_trgt;
-create table jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_1212 as select * from jp3a_cdw.dg_insn_bp_prd_mth_trgt;
+create table jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212 as select * from jp3a_cdw.dg_insn_bp_prd_mth_trgt limit 0;
 
-
-
+grant all on jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212 to group jp_ops;
 -- SP to HEMA CML
 insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
 select bp_par_sk, bp_sk, 3434 as pset_sk, mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from  jp3a_cdw.dg_insn_bp_prd_mth_trgt 
 where pset_sk = 804 and mth_cald_dt_sk NOT IN (select max(mth_cald_dt_sk) from jp3a_cdw.dg_insn_bp_prd_mth_trgt);
+
+-- REV MDS to HEMA MDS
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, 3430 as pset_sk, mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from  jp3a_cdw.dg_insn_bp_prd_mth_trgt 
+where pset_sk = 3079 and mth_cald_dt_sk NOT IN (select max(mth_cald_dt_sk) from jp3a_cdw.dg_insn_bp_prd_mth_trgt);
+
+-- REV ATL to HEMA ATL
+insert into jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212
+select bp_par_sk, bp_sk, 3435 as pset_sk, mth_cald_dt_sk, mr_rep_dr_trgt_ds, dr_agrd_trgt_ds, dr_curr_seg_nm, cycl_time_id, scen_id, inrt_ts, inrt_by_nm, modf_ts, modf_by_nm from  jp3a_cdw.dg_insn_bp_prd_mth_trgt 
+where pset_sk = 3227 and mth_cald_dt_sk NOT IN (select max(mth_cald_dt_sk) from jp3a_cdw.dg_insn_bp_prd_mth_trgt);
+
 
 
 -- EM to HEMA MM before 202007
@@ -39,7 +47,7 @@ select bp_par_sk, bp_sk,coalesce(pset_sk, -1) as pset_Sk, strt_cald_dt_sk,
 case when max(mr_rep_dr_trgt_flg) is null then 'NULL' else max(mr_rep_dr_trgt_flg) end  as mr_rep_dr_trgt_flg,
 case when max(dr_agrd_trgt_flg) is null then 'NULL' else max(dr_agrd_trgt_flg) end  as dr_agrd_trgt_flg,
 case when max(dr_curr_seg_nm) is null then 'NULL' else max(dr_curr_seg_nm) end  as dr_curr_seg_nm,
-320201213 as cycl_time_id, 1 as scen_id, getdate() inrt_ts, 'bms_ops' as inrt_by_nm, getdate() modf_ts, 'bms_ops' as  modf_by_nm
+320201217 as cycl_time_id, 1 as scen_id, getdate() inrt_ts, 'bms_ops' as inrt_by_nm, getdate() modf_ts, 'bms_ops' as  modf_by_nm
 from (
 SELECT a.bp_par_sk, a.bp_sk, 
 	CASE WHEN a.bp_par_sk = -1 THEN 'Non Target'::character varying
@@ -95,14 +103,7 @@ insert into jp3a_cdw.dg_insn_bp_prd_mth_trgt
 select * from jp_sandbox_ops.dg_insn_bp_prd_mth_trgt_ns_test_1212;
 
 
-insert into jp_rpt_a.dg_insn_bp_prd_mth_trgt
-select *, (select coalesce(max(snp_id),0)+1 snp_id from jp_ops.cntl_rpt_snp where tbl_nm='dg_insn_bp_prd_mth_trgt' and actv_flag=1) as snp_id
-from jp3a_cdw.dg_insn_bp_prd_mth_trgt ;
 
-
-INSERT INTO jp_ops.cntl_rpt_snp (snp_id,tbl_nm,actv_flag,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by,cmt,purg_flag,s3_unload_path)
-VALUES
-(55,'dg_insn_bp_prd_mth_trgt',1,320201016,1,TIMESTAMP '2020-11-20 12:59:33.000','cdwjpetl01',TIMESTAMP '2020-11-20 12:59:33.000','cdwjpetl01','',NULL,NULL);
 
 
 

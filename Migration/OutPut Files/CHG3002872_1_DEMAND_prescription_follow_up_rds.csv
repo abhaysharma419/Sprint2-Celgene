@@ -1,0 +1,9 @@
+CR_Number,Sequence,Script_Path,Service,Target_Application_Name,ec2_Directory,Snaplogic_Folder,Task_Name
+CHG3002872,1,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_70020.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,2,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_70023.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,3,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_70024.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,4,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_70025.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,5,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_70026.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,6,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_50547.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,7,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_60272.sql,RDS,comm-cdwmeta-prod-apac-01,,,
+CHG3002872,8,https://code.bms.com/svn/repos/svn_430514_db/apac-01/rds/comm-cdw-prod-apac_01/apac_orch/trunk/apac_orch_cntl_etl_sql_dml/CNTL_ETL_SQL_12031.sql,RDS,comm-cdwmeta-prod-apac-01,,,

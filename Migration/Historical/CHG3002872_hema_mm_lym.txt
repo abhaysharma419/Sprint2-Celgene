@@ -1,0 +1,17 @@
+[user_details]
+
+vitalize_num : CHG3002872
+bms_user_id = sharma56	
+email_id = abhay.sharma@zs.com
+query_email_flag = false
+
+
+[query_details]
+
+create table jp_sandbox_ops.XREF_RPT_TRGT_DR_20201219 as select * from JP2A_CDW.XREF_RPT_TRGT_DR;
+grant all on jp_sandbox_ops.XREF_RPT_TRGT_DR_20201219 to group jp_ops;
+
+delete from JP2A_CDW.XREF_RPT_TRGT_DR where pset_sk in (3431,3429) and strt_cald_dt_sk >=20200701 AND  strt_cald_dt_sk <=20201101;
+
+INSERT INTO JP2A_CDW.XREF_RPT_TRGT_DR SELECT * FROM jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_mm_3 WHERE strt_cald_dt_sk NOT IN (20201201) AND PSET_SK =3431;
+INSERT INTO JP2A_CDW.XREF_RPT_TRGT_DR SELECT * from jp_sandbox_ops.rpt_trgt_dr_temp_2_hist_hema_lym_3 WHERE strt_cald_dt_sk NOT IN (20201201) AND PSET_SK =3429;

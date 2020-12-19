@@ -8,8 +8,10 @@ query_email_flag = false
 
 [query_details]
 
-create table jp_sandbox_ops.S_SLS_MTCHL_CALL_PLAN_abhay_1217 as select * from jp3a_cdw.S_SLS_MTCHL_CALL_PLAN;
-grant all on 
+create table jp_sandbox_ops.S_SLS_MTCHL_CALL_PLAN_abhay_1217
+ as select * from jp3a_cdw.S_SLS_MTCHL_CALL_PLAN;
+grant all on jp_sandbox_ops.S_SLS_MTCHL_CALL_PLAN_abhay_1217 to group jp_ops;
+--hema HL
  update jp3a_cdw.S_SLS_MTCHL_CALL_PLAN
  set pset_sk =3433
  where pset_sk  = 2696 and strt_dt_sk <= 20201101;
@@ -65,6 +67,7 @@ grant all on
    modf_by_nm                varchar(50)
 );
 
+grant all on jp_sandbox_ops.s_sls_mtchl_call_plan_hist to group jp_ops;
   -- HEMA ATL
  insert into  jp_sandbox_ops.s_sls_mtchl_call_plan_hist
  
@@ -79,7 +82,7 @@ grant all on
  
    update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
  set pset_sk =3430
- where pset_sk  = 3430 and
+ where pset_sk  = 3079 and
  strt_dt_sk <= 20201101 ;
  
  -- HEMA CML
@@ -95,7 +98,9 @@ grant all on
     update jp_sandbox_ops.s_sls_mtchl_call_plan_hist
  set pset_sk =3431
  where pset_sk  = 1798 and
- strt_dt_sk <= 20201101 ;
+ strt_dt_sk < 20200701 ;
+ 
+ delete from jp_sandbox_ops.s_sls_mtchl_call_plan_hist where pset_sk=1798 and strt_dt_sk>=20200701;
  
  insert into jp3a_cdw.S_SLS_MTCHL_CALL_PLAN
 
@@ -258,7 +263,7 @@ FROM (SELECT a1.bp_sk,
                 ON dp.pset_id = a3.pset_id
                AND a3.subj_area_nm = 'planned_dtl'
         LEFT OUTER JOIN jp2a_Cdw.d_pset a2 ON a3.prd_grp_id = a2.pset_id 
-        WHERE SUBSTRING(a1.strt_dt_sk,1,6) >= (202007)
+        WHERE SUBSTRING(a1.strt_dt_sk,1,6) >= (202007)  and SUBSTRING(a1.strt_dt_sk,1,6) <= (202011)
         and a1.src_dlt_flag = 0 and a1.pset_sk IN (1798,1728,3080,3078,3076))
 GROUP BY bp_sk,
          par_bp_sk,
@@ -269,6 +274,8 @@ GROUP BY bp_sk,
          strt_dt_sk,
          end_dt_sk,
          ctry_cd;
+		 
+		 grant all on jp_sandbox_ops.s_sls_mtchl_call_plan_prd_grp_1118  to group jp_ops;
          
          insert into jp3a_cdw.s_sls_mtchl_call_plan
          select * from jp_sandbox_ops.s_sls_mtchl_call_plan_prd_grp_1118;

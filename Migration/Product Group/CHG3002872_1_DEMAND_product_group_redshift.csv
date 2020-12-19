@@ -1,0 +1,2 @@
+CR_Number,Sequence,Script_Path,Service,Target_Application_Name,ec2_Directory,Snaplogic_Folder,Task_Name
+CHG3002872,1,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp_ops/trunk/jp_ops_trgt_dr_seg_tier_prio_config.sql,Redshift,comm-cdw-prod-apac-02,,,

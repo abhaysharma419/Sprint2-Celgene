@@ -1290,3 +1290,13 @@ DELETE FROM jp_ops.m_folup_cfgrn WHERE serl_num = 5 AND   prd_shrt_ds = 'OP HN'A
 
 Also an update in sql_id 70019 to fix the random behaviour.
 
+
+-------DEFECT 51------------
+
+update jp2a_cdw.ref_attr
+set attr_id=attr_id-1
+where attr_id between 10049 and 10070 ;
+
+insert into jp2a_cdw.ref_attr
+values (10070, 'TREATMENT LINE', 'NULL', 'NULL', 'HEMA HL', NULL, NULL, NULL, 320180222, 1, '2018-07-20 05:53:37', 'bms_ops', '2018-07-20 05:53:37', 'bms_ops') ;
+

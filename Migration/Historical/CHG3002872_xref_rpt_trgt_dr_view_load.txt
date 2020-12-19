@@ -1,0 +1,17 @@
+[user_details]
+
+vitalize_num : CHG3002872
+bms_user_id = sharma56	
+email_id = abhay.sharma@zs.com
+query_email_flag = false
+
+
+[query_details]
+
+create table jp_sandbox_ops.a_XREF_RPT_TRGT_DR_20201219 as select * from jp_rpt_a.xref_rpt_trgt_dr;
+create table jp_sandbox_ops.v_XREF_RPT_TRGT_DR_20201219 as select * from jp_rpt_v.v_xref_rpt_trgt_dr;
+grant all on jp_sandbox_ops.a_XREF_RPT_TRGT_DR_20201219 to group jp_ops;
+grant all on jp_sandbox_ops.v_XREF_RPT_TRGT_DR_20201219 to group jp_ops;
+
+delete from jp_rpt_a.xref_rpt_trgt_dr where snp_id=32720;
+insert into jp_rpt_a.xref_rpt_trgt_dr select * ,32720 from jp2a_cdw.xref_rpt_trgt_dr;

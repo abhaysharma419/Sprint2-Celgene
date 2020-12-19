@@ -1,0 +1,105 @@
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_1','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_1','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_1','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_1','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_1','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+  
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp2_int','dr_insn_actv_all_ntrgt_daily','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','dr_insn_actv_all_ntrgt_daily','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','dr_insn_actv_all_ntrgt_daily','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','dr_insn_actv_all_ntrgt_daily','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','dr_insn_actv_all_ntrgt_daily','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp2_int','regn_dst_terr_mr_dr_insn_actv_daily','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','regn_dst_terr_mr_dr_insn_actv_daily','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','regn_dst_terr_mr_dr_insn_actv_daily','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','regn_dst_terr_mr_dr_insn_actv_daily','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','regn_dst_terr_mr_dr_insn_actv_daily','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+ 
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp2_int','rpt_sorg_prd_dr_insn_all_atvy_daily','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','rpt_sorg_prd_dr_insn_all_atvy_daily','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','rpt_sorg_prd_dr_insn_all_atvy_daily','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','rpt_sorg_prd_dr_insn_all_atvy_daily','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','rpt_sorg_prd_dr_insn_all_atvy_daily','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+   
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp_ops','m_prd_to_ther_area','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_ops','m_prd_to_ther_area','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_ops','m_prd_to_ther_area','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_ops','m_prd_to_ther_area','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_ops','m_prd_to_ther_area','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+  
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_2','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_2','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_2','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_2','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp2_int','itmd_rpt_sorg_insn_dr_prd_dtl_2','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp3a_cdw','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+  
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp3a_cdw','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp3a_cdw','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp_rpt_a','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','rpt_sorg_insn_dr_prd_dtl','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp_rpt_a','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_a','RPT_INSN_DR_PRD_ALL_DAILY_ATVY','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+
+
+INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_usr','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_sorg_insn_dr_prd_dtl','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+  
+  INSERT INTO apac_orch.cntl_gr_all_grnt (schema_nm,obj_nm,user_type,user_nm,user_pvlg,insrt_dt,inrt_by,modf_dt,modf_by,cmt) 
+VALUES
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_ops','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_etl','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_dba','DELETE,INSERT,REFERENCES,SELECT,UPDATE',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_bit','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_usr','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL),
+  ('jp_rpt_v','v_rpt_insn_dr_prd_all_daily_atvy','GROUP','jp_opslead','SELECT',now(),'cdwtech01',now(),'cdwtech01',NULL);
+
+
+  

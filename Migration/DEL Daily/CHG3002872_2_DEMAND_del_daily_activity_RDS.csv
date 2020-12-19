@@ -1,0 +1,3 @@
+Vitalize_No,Seq,Metric,Value,Service,Comments
+CHG3002872,1,apac_orch.cntl_rule_parm,"1656, 1670",RDS,
+CHG3002872,2,apac_orch.cntl_rule_type,"select * from apac_orch.cntl_rule_type where rule_num in ( 1656,1670)",RDS,

@@ -1,0 +1,4 @@
+Vitalize_No,Seq,Metric,Value,Service,Comments
+CHG3002872,1,apac_orch.cntl_etl_sql,"70020 , 70023 ,70024 ,70025, 70026 ,50547 ,60272 ,12031",RDS,
+CHG3002872,2,TABLE DDL,"jp_rpt_a.f_bp_prd_rx_fol_up, jp_rpt_a.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up ,jp2_int.f_bp_prd_rx_fol_up_temp , jp2_int.itmd_3_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up ,jp2_int.itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up, jp2a_cdw.f_bp_prd_rx_fol_up ,jp3a_cdw.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up ",Redshift,
+CHG3002872,3,VIEW DDL,"jp_rpt_v.v_f_bp_prd_rx_fol_up ,jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up",Redshift,

@@ -1,0 +1,10 @@
+CR_Number,Sequence,Script_Path,Service,Target_Application_Name,ec2_Directory,Snaplogic_Folder,Task_Name
+CHG3002872,1,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp_rpt_a/trunk/jp_rpt_a_f_bp_prd_rx_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,2,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp_rpt_a/trunk/jp_rpt_a_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,3,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp2_int/trunk/jp2_int_f_bp_prd_rx_fol_up_temp.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,4,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp2_int/trunk/jp2_int_itmd_3_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,5,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp2_int/trunk/jp2_int_itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,6,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp2a_cdw/trunk/jp2a_cdw_f_bp_prd_rx_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,7,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp3a_cdw/trunk/jp3a_cdw_s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,8,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp_rpt_v/trunk/jp_rpt_v_v_f_bp_prd_rx_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,
+CHG3002872,9,https://code.bms.com/svn/repos/svn_430514_db/apac-01/redshift/comm-cdw-prod-apac_01/jp_rpt_v/trunk/jp_rpt_v_v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up.sql,Redshift,comm-cdw-prod-apac-02,,,

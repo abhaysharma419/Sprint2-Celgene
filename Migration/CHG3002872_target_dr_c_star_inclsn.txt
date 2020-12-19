@@ -1,0 +1,34 @@
+[user_details]
+
+vitalize_num : CHG3002872
+bms_user_id = sharma56	
+email_id = abhay.sharma@zs.com
+query_email_flag = false
+
+
+[query_details]
+
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''EQ-2008976'',''OR-2009005'',''BA-2000135'',''IO LC-2012085'',''IO MELA-2012087'',''IO EC-2014509'',''IO CRC-2014508'',''HEMA HL-2016245'',''IO GC-2012084'',''IO RCC-2012086'',''IO HN-2012088'',''EM-2009907''  ,''HEMA MM-2016240''
+,''HEMA MDS-2016242''
+,''HEMA LYM-2016241''
+,''HEMA ATL-2016252''
+,''HEMA CML-2016244''
+,''LDX-2015556''
+,''OP MELA-52324719''
+,''OPYV MELA-2011827'',
+,''OP RCC-52324723''
+,''OPYV RCC-2012012''
+,''REV MM-2015312''
+,''EM-2009907''
+,''REV FL-2015314''
+,''IST-2015311''
+,''POM-2009748''
+,''OP CRC-2014374''
+,''OPYV CRC-2015699''
+,''YV-2000181''
+,''OP Chemo LC-2016229''
+,''OPYV Chemo LC-2016231''
+,''OP LC-2009032''
+,''OPYV LC-2016230'''
+WHERE rpt_tbl_nm = 'RPT_SORG_PRD_INSN_DR_LST';

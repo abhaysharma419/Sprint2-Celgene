@@ -1,0 +1,25 @@
+[user_details]
+
+vitalize_num : CHG3002872
+bms_user_id = sharma56	
+email_id = abhay.sharma@zs.com
+query_email_flag = false
+
+
+[query_details]
+
+create table jp_sandbox_ops.f_bp_prd_rx_fol_up_1217 as select * from jp2a_cdw.f_bp_prd_rx_fol_up;
+create table jp_sandbox_ops.a_f_bp_prd_rx_fol_up_1217 as select * from jp_rpt_a.f_bp_prd_rx_fol_up;
+
+grant all on jp_sandbox_ops.f_bp_prd_rx_fol_up_1217 to group jp_ops;
+grant all on jp_sandbox_ops.a_f_bp_prd_rx_fol_up_1217 to group jp_ops;
+
+drop view jp_rpt_v.v_f_bp_prd_rx_fol_up;
+drop view jp_rpt_v.v_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+drop table jp_rpt_a.f_bp_prd_rx_fol_up;
+drop table jp_rpt_a.s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+drop table jp2_int.f_bp_prd_rx_fol_up_temp;
+drop table jp2_int.itmd_3_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+drop table jp2_int.itmd_4_s_sorg_sls_wrkr_bp_prd_time_bckt_srvy_fol_up;
+drop table jp2a_cdw.f_bp_prd_rx_fol_up;
+drop table jp3a_cdw.s_sorg_sls_wrkr_bp_prd_cald_dt_srvy_fol_up;

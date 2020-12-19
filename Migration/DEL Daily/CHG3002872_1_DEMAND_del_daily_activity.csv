@@ -1,0 +1,6 @@
+Vitalize_No,Seq,Metric,Value,Service,Comments
+CHG3002872,1,apac_orch.cntl_etl_sql,"71020 , 71021 ,71022 , 71023 ,71024",RDS,
+CHG3002872,2,TABLE DDL,"jp2_int.dr_insn_actv_all_ntrgt_daily , jp2_int.regn_dst_terr_mr_dr_insn_actv_daily , jp2_int.rpt_sorg_prd_dr_insn_all_atvy_daily , jp3a_cdw.RPT_INSN_DR_PRD_ALL_DAILY_ATVY, jp_rpt_a.RPT_INSN_DR_PRD_ALL_DAILY_ATVY",Redshift,
+CHG3002872,3,VIEW DDL,jp_rpt_v.v_rpt_insn_dr_prd_all_daily_atvy,Redshift,
+CHG3002872,4,apac_orch.cntl_rule_parm,select * from apac_orch.cntl_rule_parm where rule_num = 1656;,RDS,
+CHG3002872,5,apac_orch.cntl_rule_type,select * from apac_orch.cntl_rule_type where rule_num = 1656;,RDS,

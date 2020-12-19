@@ -1,0 +1,108 @@
+[user_details]
+
+vitalize_num : CHG3002872
+bms_user_id = sharma56	
+email_id = abhay.sharma@zs.com
+query_email_flag = false
+
+
+[query_details]
+
+create table jp_sandbox_ops.ref_rpt_prd_icln_1216 as select * from jp_rpt_a.ref_rpt_prd_icln;
+create table jp_sandbox_ops.m_prd_trgt_pat_trk_1216 as select * from jp_ops.m_prd_trgt_pat_trk;
+CREATE table jp_sandbox_ops.m_pat_trk_cfgrn_1216 as select * from jp_ops.m_pat_trk_cfgrn;
+CREATE TABLE jp_sandbox_ops.ref_attr_1216  AS jp2a_cdw.ref_attr;
+
+
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''EQ'',''OR'',''EM'',''IO LC'',''IO RCC'',''IO GC'',''IO CRC'',''IO EC'',''IO MELA'',''IO HN'',''OP RCC'',''YV'',''OPYV RCC'',''OP MELA'',''OPYV MELA'',''OP CRC'',''OPYV CRC'',''HEMA MM'',''HEMA ATL'',''HEMA CML'',''HEMA MDS'',''HEMA LYM'',''HEMA HL'',''IST'',''POM'',''REV MM'',''REV FL'',''OP LC'',''OPYV LC'',''OP Chemo LC'',''OPYV Chemo LC''
+'
+WHERE rpt_tbl_nm = 'S_SORG_SREP_BP_PRD_TIME_BCKT_PAT_TRK';
+
+UPDATE jp_rpt_a.ref_rpt_prd_icln
+   SET prd_list = '''EQ'',''OR'',''EM'',''IO LC'',''OP LC'',''OPYV LC'',''OP Chemo LC'',''OPYV Chemo LC'',''IO RCC'',''IO GC'',''IO CRC'',''IO EC'',''IO MELA'',''IO HN'',''OP RCC'',''YV'',''OPYV RCC'',''OP MELA'',''OPYV MELA'',''REV MM''
+,''REV FL''
+,''POM''
+,''IST''
+,''LDX''
+,''OP CRC'',''OPYV CRC'',''HEMA MM'',''HEMA ATL'',''HEMA CML'',''HEMA MDS'',''HEMA LYM'',''HEMA HL'''
+WHERE rpt_tbl_nm = 'S_SORG_BP_PRD_TIME_BCKT_PAT_TRK';
+
+
+INSERT INTO jp_ops.m_prd_trgt_pat_trk (prd_shrt_ds,insn_trgt_disp_nm,trgt_type_txt,segn_type_ds,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  ('HEMA ATL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA ATL','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA ATL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA CML','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA CML','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA CML','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA LYM','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA LYM','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA LYM','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MDS','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MDS','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MDS','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MM','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MM','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('HEMA MM','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('IST','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('IST','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('IST','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('OP Chemo LC','-','Total','Target Type',320201210,1,TIMESTAMP '2020-12-10 03:54:47.000','bms_ops',TIMESTAMP '2020-12-10 03:54:47.000','bms_ops'),
+  ('OP Chemo LC','Co-Pro Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OP Chemo LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OP Chemo LC','Co-Visit','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OP Chemo LC','BMS Solo','BMS','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OP Chemo LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OP Chemo LC','BMS Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','-','Total','Target Type',320201210,1,TIMESTAMP '2020-12-10 03:54:47.000','bms_ops',TIMESTAMP '2020-12-10 03:54:47.000','bms_ops'),
+  ('OPYV Chemo LC','Co-Pro Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','Co-Visit','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','BMS','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV Chemo LC','BMS Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','-','Total','Target Type',320201210,1,TIMESTAMP '2020-12-10 03:54:47.000','bms_ops',TIMESTAMP '2020-12-10 03:54:47.000','bms_ops'),
+  ('OPYV LC','Co-Pro Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','Co-Visit','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','Co-Visit','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','BMS Solo','BMS','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','BMS Solo','BMS + Co-Visit','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('OPYV LC','BMS Solo','Total','Target Type',320201126,1,TIMESTAMP '2020-12-01 02:41:27.000','bms_ops',TIMESTAMP '2020-12-01 02:41:27.000','bms_ops'),
+  ('POM','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('POM','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('POM','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV ATL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV ATL','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV ATL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV FL','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV FL','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV FL','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MDS','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MDS','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MDS','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MM','-','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MM','BMS Solo','BMS','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops'),
+  ('REV MM','BMS Solo','Total','Target Type',320180601,1,TIMESTAMP '2018-06-08 05:39:43.000','bms_ops',TIMESTAMP '2018-06-08 05:39:43.000','bms_ops');
+
+  UPDATE   jp_ops.m_prd_trgt_pat_trk SET PRD_SHRT_DS='HEMA HL' where prd_shrt_ds in ('IO HL');
+
+  insert into jp_ops.m_pat_trk_cfgrn
+  select * from jp_sandbox_ops.m_pat_trk_cfgrn_new_1217;
+  
+  
+DELETE FROM  jp2a_cdw.ref_attr where attr_typ='TREATMENT LINE' and attr_nm='IO MELA;
+DELETE from jp2a_cdw.ref_attr where attr_typ='TREATMENT LINE' and attr_nm='OPYV MELA' ;
+
+INSERT INTO jp2a_cdw.ref_attr (attr_id,attr_typ,attr_cd,attr_desc,attr_nm,prnt_attr_id,src_eff_dt,src_end_dt,cycl_time_id,scen_id,inrt_dt,inrt_by,modf_dt,modf_by) 
+VALUES
+  (425,'TREATMENT LINE','TOTAL','TOTAL','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
+  (426,'TREATMENT LINE','OPYV MELA','OPYV MELA','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
+  (690,'TREATMENT LINE','OP MELA','OP MELA','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
+  (692,'TREATMENT LINE','YV','YV','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
+  (694,'TREATMENT LINE','DUMMY','DUMMY','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops'),
+  (695,'TREATMENT LINE','NULL','NULL','IO MELA',NULL,NULL,NULL,320181023,1,TIMESTAMP '2019-01-16 07:12:13.000','bms_ops',TIMESTAMP '2019-01-16 07:12:13.000','bms_ops');
+
+insert into jp2a_cdw.ref_attr
+select * from jp_sandbox_ops.ref_attr_new_1217;
